@@ -5,7 +5,7 @@ import edu.austral.dissis.chess.piece.Piece
 class NormalBoard(
     private val positions: Map<Coordinate, Piece>,
     private val boardSize: BoardSize = BoardSize(8, 8)
-) : Board {
+): Board {
 
     override fun movePiece(from: Coordinate, to: Coordinate): Board {
         val piece: Piece = positions[from]?: throw NoSuchElementException("No piece at $from")
@@ -13,8 +13,16 @@ class NormalBoard(
         return NormalBoard(positions + Pair(to, piece) - from)
     }
 
+    override fun removePiece(from: Coordinate): Board {
+        return NormalBoard(positions - from)
+    }
+
     override fun getPiece(coordinate: Coordinate): Piece? {
         return positions[coordinate]
+    }
+
+    override fun addPiece(coordinate: Coordinate, piece: Piece): NormalBoard {
+        return NormalBoard(positions + Pair(coordinate, piece))
     }
 
     override fun hasCoordinate(coordinate: Coordinate): Boolean {

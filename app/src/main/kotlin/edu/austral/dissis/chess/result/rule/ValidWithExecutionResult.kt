@@ -1,4 +1,11 @@
 package edu.austral.dissis.chess.result.rule
 
-object ValidWithExecutionResult: RuleResult {
+import edu.austral.dissis.chess.result.action.Action
+
+class ValidWithExecutionResult(
+    private val actions: List<Action>
+): RuleResult {
+    fun getActions(): List<Action> {
+        return actions
+    }
 }

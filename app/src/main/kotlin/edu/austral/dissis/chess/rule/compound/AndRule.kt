@@ -1,6 +1,7 @@
 package edu.austral.dissis.chess.rule.compound
 
 import edu.austral.dissis.chess.board.Board
+import edu.austral.dissis.chess.board.NormalBoard
 import edu.austral.dissis.chess.game.Move
 import edu.austral.dissis.chess.result.rule.*
 import edu.austral.dissis.chess.rule.Rule
@@ -26,21 +27,18 @@ class AndRule(
             ValidResult -> {
                 when(newResult){
                     ValidResult -> previousResult
-                    ValidWithExecutionResult -> newResult
-                    is CheckMateResult -> newResult
+                    is ValidWithExecutionResult -> newResult
                     is InvalidResult -> throw IllegalStateException("New result should not be invalid in AND rule")
                 }
             }
 
-            ValidWithExecutionResult -> {
+            is ValidWithExecutionResult -> {
                 when(newResult){
                     ValidResult -> previousResult
-                    ValidWithExecutionResult -> previousResult
-                    is CheckMateResult -> newResult
+                    is ValidWithExecutionResult -> previousResult
                     is InvalidResult -> throw IllegalStateException("New result should not be invalid in AND rule")
                 }
             }
-            is CheckMateResult -> previousResult
             is InvalidResult -> {
                 throw IllegalStateException("Previous result should not be invalid in AND rule")
             }

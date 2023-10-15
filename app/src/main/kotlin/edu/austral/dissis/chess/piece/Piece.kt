@@ -5,7 +5,7 @@ import edu.austral.dissis.chess.piece.enum.PieceType
 import edu.austral.dissis.chess.result.rule.RuleResult
 import edu.austral.dissis.chess.rule.Rule
 
-data class Piece (val name: PieceType, val pieceRule: Rule, val team: Team){
+data class Piece (val name: PieceType, val pieceRule: Rule, val team: Team, private val id: String = ""){
     fun validateMove(move: Move): RuleResult {
         return this.pieceRule.validateMove(move, move.getBoard()) // TODO: Should piece create the Move object?
     }
@@ -15,7 +15,8 @@ data class Piece (val name: PieceType, val pieceRule: Rule, val team: Team){
     }
 
     fun getId(): String {
-        return this.hashCode().toString()
+        return if(id != "") id
+        else this.hashCode().toString()
     }
 }
 

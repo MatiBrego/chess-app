@@ -1,6 +1,7 @@
 package edu.austral.dissis.chess.rule.direction
 
 import edu.austral.dissis.chess.board.Board
+import edu.austral.dissis.chess.board.NormalBoard
 import edu.austral.dissis.chess.board.Coordinate
 import edu.austral.dissis.chess.game.Move
 import edu.austral.dissis.chess.piece.Team
