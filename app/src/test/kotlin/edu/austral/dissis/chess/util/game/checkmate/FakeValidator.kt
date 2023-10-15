@@ -1,7 +1,7 @@
-package edu.austral.dissis.chess.game.checkmate
+package edu.austral.dissis.chess.util.game.checkmate
 
 import edu.austral.dissis.chess.board.Board
-import edu.austral.dissis.chess.board.NormalBoard
+import edu.austral.dissis.chess.game.checkmate.CheckMateValidator
 import edu.austral.dissis.chess.piece.Team
 import edu.austral.dissis.chess.rule.Rule
 

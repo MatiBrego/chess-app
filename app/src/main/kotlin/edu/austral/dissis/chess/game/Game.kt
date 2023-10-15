@@ -5,10 +5,7 @@ import edu.austral.dissis.chess.board.Coordinate
 import edu.austral.dissis.chess.game.checkmate.CheckMateValidator
 import edu.austral.dissis.chess.piece.Piece
 import edu.austral.dissis.chess.piece.Team
-import edu.austral.dissis.chess.result.action.Action
-import edu.austral.dissis.chess.result.action.ApplyMove
-import edu.austral.dissis.chess.result.action.ConvertPiece
-import edu.austral.dissis.chess.result.action.RemovePiece
+import edu.austral.dissis.chess.result.action.*
 import edu.austral.dissis.chess.result.move.*
 import edu.austral.dissis.chess.result.rule.InvalidResult
 import edu.austral.dissis.chess.result.rule.ValidResult
@@ -59,22 +56,22 @@ class Game(
 
     private fun validatePieceRules(move: Move, piece: Piece): MoveResult {
         return when (val result = piece.validateMove(move)){
-            ValidResult -> executeActions(listOf(ApplyMove(move.getFrom(), move.getTo())))
-            is ValidWithExecutionResult -> executeActions(result.getActions())
+            ValidResult -> executeActions(listOf(ApplyMove(RelativePosition(), RelativePosition(move.getTo().row - move.getFrom().row, move.getTo().column - move.getFrom().column))), move.getFrom())
+            is ValidWithExecutionResult -> executeActions(result.getActions(), move.getFrom())
             is InvalidResult -> PieceRuleViolationResult(result.getMessage())
         }
     }
 
-    private fun executeActions(actions: List<Action>): MoveResult {
+    private fun executeActions(actions: List<Action>, from: Coordinate): MoveResult {
         var modifiedBoard: Board = board
         for (action in actions){
             modifiedBoard = when (action){
                 is ApplyMove  ->
-                    applyMove(action.getFrom(), action.getTo())
+                    applyMove(action.getFrom(from), action.getTo(from))
                 is RemovePiece  ->
-                    removePiece(action.getFrom())
+                    removePiece(action.getFrom(from))
                 is ConvertPiece ->
-                    convertPiece(action.getFrom(), action.getNewPiece())
+                    convertPiece(action.getFrom(from), modifiedBoard, action.getNewPiece())
             }
         }
         return SuccessfulResult(
@@ -95,9 +92,9 @@ class Game(
         return board.removePiece(coordinate)
     }
 
-    private fun convertPiece(coordinate: Coordinate, newPiece: Piece): Board {
-        val oldPiece: Piece = board.getPiece(coordinate) ?: throw NoSuchElementException("No piece found")
-        return board.addPiece(coordinate, oldPiece.copy(
+    private fun convertPiece(coordinate: Coordinate, modifiedBoard: Board,newPiece: Piece): Board {
+        val oldPiece: Piece = modifiedBoard.getPiece(coordinate) ?: throw NoSuchElementException("No piece found")
+        return modifiedBoard.addPiece(coordinate, oldPiece.copy(
             name = newPiece.name,
             team = newPiece.team,
             pieceRule = newPiece.pieceRule,
