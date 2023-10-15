@@ -67,9 +67,9 @@ class Game(
         for (action in actions){
             modifiedBoard = when (action){
                 is ApplyMove  ->
-                    applyMove(action.getFrom(from), action.getTo(from))
+                    applyMove(action.getFrom(from), action.getTo(from), modifiedBoard)
                 is RemovePiece  ->
-                    removePiece(action.getFrom(from))
+                    removePiece(action.getFrom(from), modifiedBoard)
                 is ConvertPiece ->
                     convertPiece(action.getFrom(from), modifiedBoard, action.getNewPiece())
             }
@@ -84,12 +84,12 @@ class Game(
         )
     }
 
-    private fun applyMove(from: Coordinate, to: Coordinate): Board {
-        return board.movePiece(from, to)
+    private fun applyMove(from: Coordinate, to: Coordinate, modifiedBoard: Board): Board {
+        return modifiedBoard.movePiece(from, to)
     }
 
-    private fun removePiece(coordinate: Coordinate): Board {
-        return board.removePiece(coordinate)
+    private fun removePiece(coordinate: Coordinate, modifiedBoard: Board): Board {
+        return modifiedBoard.removePiece(coordinate)
     }
 
     private fun convertPiece(coordinate: Coordinate, modifiedBoard: Board,newPiece: Piece): Board {

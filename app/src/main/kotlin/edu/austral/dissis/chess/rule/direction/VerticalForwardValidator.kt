@@ -10,6 +10,7 @@ import edu.austral.dissis.chess.result.rule.RuleResult
 import edu.austral.dissis.chess.result.rule.ValidResult
 import edu.austral.dissis.chess.rule.Rule
 
+// Remember what is considered forward depends on the team
 class VerticalForwardValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         return if (move.getTurn() == Team.WHITE) {

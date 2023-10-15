@@ -20,6 +20,9 @@ import edu.austral.dissis.chess.rule.special.HasEnemyValidator
 import edu.austral.dissis.chess.rule.special.IsFirstMoveValidator
 import edu.austral.dissis.chess.rule.compound.AndRule
 import edu.austral.dissis.chess.rule.compound.OrRule
+import edu.austral.dissis.chess.rule.direction.LeftValidator
+import edu.austral.dissis.chess.rule.direction.RightValidator
+import edu.austral.dissis.chess.rule.movequantity.ExactMovementValidator
 import edu.austral.dissis.chess.rule.special.IsOpposingRowValidator
 
 fun createRook(team: Team): Piece {
@@ -92,16 +95,50 @@ fun createQueen(team: Team): Piece {
 fun createKing(team: Team): Piece {
     return Piece(
         PieceType.KING,
-        AndRule(
+        OrRule(
             listOf(
-                OrRule(
+                AndRule(
                     listOf(
-                        HorizontalValidator(),
-                        VerticalValidator(),
-                        DiagonalValidator(),
+                        OrRule(
+                            listOf(
+                                HorizontalValidator(),
+                                VerticalValidator(),
+                                DiagonalValidator(),
+                            )
+                        ),
+                        LimitedMovementValidator(1)
                     )
                 ),
-                LimitedMovementValidator(1)
+                AndRule(
+                    listOf(
+                        IsFirstMoveValidator(),
+                        HorizontalValidator(),
+                        HorizontalObstacleValidator(),
+                        ExactMovementValidator(2),
+                        LeftValidator(),
+                        PerformActionRule(
+                            listOf(
+                                ApplyMove(RelativePosition(), RelativePosition(0, -2)),
+                                ApplyMove(RelativePosition(0, -4), RelativePosition(0, -1)),
+                            )
+                        )
+                    )
+                ),
+                AndRule(
+                    listOf(
+                        IsFirstMoveValidator(),
+                        HorizontalValidator(),
+                        HorizontalObstacleValidator(),
+                        ExactMovementValidator(2),
+                        RightValidator(),
+                        PerformActionRule(
+                            listOf(
+                                ApplyMove(RelativePosition(0, 0), RelativePosition(0, 2)),
+                                ApplyMove(RelativePosition(0, 3), RelativePosition(0, 1)),
+                            )
+                        )
+                    )
+                )
             )
         ),
         team

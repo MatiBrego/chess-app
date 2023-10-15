@@ -8,7 +8,8 @@ import edu.austral.dissis.chess.result.rule.InvalidResult
 import edu.austral.dissis.chess.result.rule.RuleResult
 import edu.austral.dissis.chess.result.rule.ValidResult
 import edu.austral.dissis.chess.rule.Rule
-class HorizontalObstacleValidator: Rule{
+class HorizontalObstacleValidator(
+): Rule{
 
     override fun validateMove(move: Move, board: Board): RuleResult {
         // Check if move is not horizontal
