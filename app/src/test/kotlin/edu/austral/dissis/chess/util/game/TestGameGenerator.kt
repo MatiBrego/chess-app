@@ -16,7 +16,6 @@ class TestGameGenerator {
             NormalBoard(
             startingPositionGenerator.generate()),
             Team.WHITE,
-            emptyMap(),
             rules,
             FakeValidator()
         )

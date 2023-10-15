@@ -10,7 +10,11 @@ class NormalBoard(
     override fun movePiece(from: Coordinate, to: Coordinate): Board {
         val piece: Piece = positions[from]?: throw NoSuchElementException("No piece at $from")
 
-        return NormalBoard(positions + Pair(to, piece) - from)
+        return NormalBoard(positions + Pair(to, piece.copy(
+            moveCount = piece.getMoveCount() + 1,
+            id = piece.getId()
+            )
+        ) - from)
     }
 
     override fun removePiece(from: Coordinate): Board {
@@ -21,7 +25,7 @@ class NormalBoard(
         return positions[coordinate]
     }
 
-    override fun addPiece(coordinate: Coordinate, piece: Piece): NormalBoard {
+    override fun addPiece(coordinate: Coordinate, piece: Piece): Board {
         return NormalBoard(positions + Pair(coordinate, piece))
     }
 
@@ -30,7 +34,7 @@ class NormalBoard(
     }
 
     override fun print() {
-        val board = Array(8) { Array(8) { "---------" } }
+        val board = Array(getRowQuantity()) { Array(getColumnQuantity()) { "---------" } }
 
         positions.forEach { (coordinate, piece) ->
             board[coordinate.row][coordinate.column] = piece.toString()

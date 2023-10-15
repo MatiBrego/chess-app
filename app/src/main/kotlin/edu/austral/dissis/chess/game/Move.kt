@@ -12,7 +12,6 @@ data class Move(
     private val to: Coordinate,
     private val piece: Piece,
     private val turn: Team,
-    private val history: List<Move>
 ) {
     fun getBoard(): Board {
         return board
@@ -32,9 +31,5 @@ data class Move(
 
     fun getTurn(): Team {
         return turn
-    }
-
-    fun getHistory(): List<Move>{
-        return history
     }
 }

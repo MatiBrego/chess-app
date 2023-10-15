@@ -10,7 +10,7 @@ import edu.austral.dissis.chess.rule.Rule
 
 class IsFirstMoveValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
-        if (move.getHistory().isEmpty()) return ValidResult
+        if (move.getPiece().getMoveCount() == 0) return ValidResult
         return InvalidResult()
     }
 }

@@ -21,7 +21,7 @@ class CheckValidator {
                 val piece = board.getPiece(coordinate) ?: throw NoSuchElementException("No piece found")
                 when (
                     piece.validateMove(
-                        Move(board, coordinate, kingPosition, piece, kingsTeam, emptyList()
+                        Move(board, coordinate, kingPosition, piece, kingsTeam
                         )
                     )
                 ) {

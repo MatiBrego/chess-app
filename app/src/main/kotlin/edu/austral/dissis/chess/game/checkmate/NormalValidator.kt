@@ -36,7 +36,7 @@ class NormalValidator(
         for(i in 1..board.getRowQuantity()){
             for(j in 1..board.getColumnQuantity()){
                 val to = Coordinate(i,j)
-                val move = Move(board, pieceCoordinate, to, piece, team, emptyList())
+                val move = Move(board, pieceCoordinate, to, piece, team)
                 if(piece.validateMove(move) is ValidResult && gameRules.all { it.validateMove(move, board) is ValidResult }){
                     validMoves = validMoves.plus(move)
                 }

@@ -14,7 +14,6 @@ fun createNormalGame(): Game {
     return Game(
         board = createBoard(),
         turn = Team.WHITE,
-        emptyMap(),
         createNormalRules(),
         NormalValidator()
     )
