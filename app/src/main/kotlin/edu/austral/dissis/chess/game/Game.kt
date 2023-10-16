@@ -22,7 +22,7 @@ class Game(
     fun move(from: Coordinate, to: Coordinate): MoveResult {
         val piece = this.board.getPiece(from) ?: return NoPieceInCoordinateResult
 
-        val move = Move(this.board, from, to, piece, turn)
+        val move = Move(from, to, piece, turn)
 
         val gameValidationResult = validateGameRules(move)
         if (gameValidationResult !is SuccessfulResult) return gameValidationResult
@@ -55,7 +55,7 @@ class Game(
     }
 
     private fun validatePieceRules(move: Move, piece: Piece): MoveResult {
-        return when (val result = piece.validateMove(move)){
+        return when (val result = piece.validateMove(move, board)){
             ValidResult -> executeActions(listOf(ApplyMove(RelativePosition(), RelativePosition(move.getTo().row - move.getFrom().row, move.getTo().column - move.getFrom().column))), move.getFrom())
             is ValidWithExecutionResult -> executeActions(result.getActions(), move.getFrom())
             is InvalidResult -> PieceRuleViolationResult(result.getMessage())
