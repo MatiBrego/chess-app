@@ -2,7 +2,10 @@ package edu.austral.dissis.chess.game
 
 import edu.austral.dissis.chess.board.Board
 import edu.austral.dissis.chess.board.Coordinate
+import edu.austral.dissis.chess.executor.MoveExecutor
+import edu.austral.dissis.chess.executor.NormalExecutor
 import edu.austral.dissis.chess.game.checkmate.CheckMateValidator
+import edu.austral.dissis.chess.game.checkmate.NormalValidator
 import edu.austral.dissis.chess.piece.Piece
 import edu.austral.dissis.chess.piece.Team
 import edu.austral.dissis.chess.result.action.*
@@ -16,7 +19,8 @@ class Game(
     private var board: Board,
     private val turn: Team = Team.WHITE,
     private val rules: List<Rule>,
-    private val checkMateRule: CheckMateValidator,
+    private val checkMateRule: CheckMateValidator = NormalValidator(),
+    private val moveExecutor: MoveExecutor = NormalExecutor()
 ) {
 
     fun move(from: Coordinate, to: Coordinate): MoveResult {
@@ -56,49 +60,34 @@ class Game(
         val piece = board.getPiece(move.getFrom()) ?: throw NoSuchElementException("No piece found")
 
         return when (val result = piece.validateMove(move, board)){
-            ValidResult -> executeActions(listOf(ApplyMove(RelativePosition(), RelativePosition(move.getTo().row - move.getFrom().row, move.getTo().column - move.getFrom().column))), move.getFrom())
-            is ValidWithExecutionResult -> executeActions(result.getActions(), move.getFrom())
+            ValidResult -> executeSingleMove(move, board)
+            is ValidWithExecutionResult -> executeActions(result.getActions(), move, board)
             is InvalidResult -> PieceRuleViolationResult(result.getMessage())
         }
     }
 
-    private fun executeActions(actions: List<Action>, from: Coordinate): MoveResult {
-        var modifiedBoard: Board = board
-        for (action in actions){
-            modifiedBoard = when (action){
-                is ApplyMove  ->
-                    applyMove(action.getFrom(from), action.getTo(from), modifiedBoard)
-                is RemovePiece  ->
-                    removePiece(action.getFrom(from), modifiedBoard)
-                is ConvertPiece ->
-                    convertPiece(action.getFrom(from), modifiedBoard, action.getNewPiece())
-            }
-        }
+    private fun executeSingleMove(move: Move, board: Board): SuccessfulResult{
+        val modifiedBoard: Board = moveExecutor.executeSingleMove(move, board)
         return SuccessfulResult(
             Game(
                 modifiedBoard,
                 getEnemyTeam(),
                 rules,
-                checkMateRule
+                checkMateRule,
+                moveExecutor
             )
         )
     }
 
-    private fun applyMove(from: Coordinate, to: Coordinate, modifiedBoard: Board): Board {
-        return modifiedBoard.movePiece(from, to)
-    }
-
-    private fun removePiece(coordinate: Coordinate, modifiedBoard: Board): Board {
-        return modifiedBoard.removePiece(coordinate)
-    }
-
-    private fun convertPiece(coordinate: Coordinate, modifiedBoard: Board,newPiece: Piece): Board {
-        val oldPiece: Piece = modifiedBoard.getPiece(coordinate) ?: throw NoSuchElementException("No piece found")
-        return modifiedBoard.addPiece(coordinate, oldPiece.copy(
-            pieceType = newPiece.pieceType,
-            team = newPiece.team,
-            pieceRule = newPiece.pieceRule,
-            id = oldPiece.getId()
+    private fun executeActions(actions: List<Action>, move: Move, board: Board): SuccessfulResult {
+        val modifiedBoard: Board = moveExecutor.executeActions(actions, move, board)
+        return SuccessfulResult(
+            Game(
+                modifiedBoard,
+                getEnemyTeam(),
+                rules,
+                checkMateRule,
+                moveExecutor
             )
         )
     }

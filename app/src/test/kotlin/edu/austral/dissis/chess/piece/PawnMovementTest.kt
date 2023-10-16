@@ -4,6 +4,7 @@ import edu.austral.dissis.chess.board.Coordinate
 import edu.austral.dissis.chess.factory.pawnInCenter
 import edu.austral.dissis.chess.factory.pawnInCenterBlocked
 import edu.austral.dissis.chess.game.Game
+import edu.austral.dissis.chess.result.move.MoveResult
 import edu.austral.dissis.chess.result.move.PieceRuleViolationResult
 import edu.austral.dissis.chess.result.move.SuccessfulResult
 import edu.austral.dissis.chess.util.game.TestGameGenerator

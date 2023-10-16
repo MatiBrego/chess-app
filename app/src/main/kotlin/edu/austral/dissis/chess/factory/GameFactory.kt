@@ -1,6 +1,7 @@
 package edu.austral.dissis.chess.factory
 
 import edu.austral.dissis.chess.board.Board
+import edu.austral.dissis.chess.executor.NormalExecutor
 import edu.austral.dissis.chess.game.Game
 import edu.austral.dissis.chess.game.checkmate.NormalValidator
 import edu.austral.dissis.chess.piece.Team
@@ -11,8 +12,9 @@ fun createNormalGame(): Game {
     return Game(
         board = createBoard(),
         turn = Team.WHITE,
-        createNormalRules(),
-        NormalValidator()
+        rules = createNormalRules(),
+        checkMateRule = NormalValidator(),
+        moveExecutor = NormalExecutor()
     )
 }
 

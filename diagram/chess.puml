@@ -102,6 +102,7 @@ class Game {
     Team turn
     List<Rule> rules
     CheckMateValidator checkMateRule
+    MoveExecutor moveExecutor
     move(Coordinate from, Coordinate to): MoveResult
 }
 
@@ -118,6 +119,15 @@ Game --> Board
 Game --> Rule
 Game --> CheckMateValidator
 Game --> MoveResult
+Game --> MoveExecutor
 'Game Module
 
+'Executor Module
+interface MoveExecutor{
+    executeSingleMove(Move move, Board board): Board
+    executeActions(List<Action> actions, Move move, Board board): Board
+}
+
+class NormalExecutor implements MoveExecutor
+'Executor Module
 @enduml
