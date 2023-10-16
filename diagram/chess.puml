@@ -80,7 +80,9 @@ class ValidWithExecutionResult implements RuleResult{
 
 interface MoveResult {}
 
-class SuccessfulResult implements MoveResult {}
+class SuccessfulResult implements MoveResult {
+    Game game
+}
 class UnsuccessfulResult implements MoveResult{
     String message
 }

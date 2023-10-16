@@ -1,0 +1,27 @@
+title Move a Piece
+
+Client->Game: move(from, to)
+loop For each game rule
+  Game->Rule: validateMove(move, board)
+  Rule-->Game: RuleResult
+end
+alt Any game rule result is invalid
+  Game-->Client: UnsuccessfulMove
+  else All game rules are met
+    Game->Piece:validateMove(move, board)
+    Piece->Rule: validateMove(move, board)
+
+    alt Piece rule result is invalid
+      Rule-->Piece: InvalidResult
+      Piece-->Game: InvalidResult
+      Game-->Client:UnsuccessfulResult
+    else Piece rule is valid
+      Rule-->Piece: ValidResult or ValidWithExecutionResult
+      Piece-->Game: ValidResult or ValidWithExecutionResult
+      Game->MoveExecutor: execute(List<Action> actions)
+      MoveExecutor-->Game: Board
+    Game-->Client: SuccessfulResult(newGame)
+  end
+end
+
+Page to render code: https://sequencediagram.org/
