@@ -1,12 +1,11 @@
 package edu.austral.dissis.chess.piece
 
 import edu.austral.dissis.chess.game.Move
-import edu.austral.dissis.chess.piece.enum.PieceType
 import edu.austral.dissis.chess.result.rule.RuleResult
 import edu.austral.dissis.chess.rule.Rule
 
 data class Piece (
-    val name: PieceType,
+    val pieceType: PieceType,
     val pieceRule: Rule,
     val team: Team,
     private val id: String = "",
@@ -16,7 +15,7 @@ data class Piece (
     }
 
     override fun toString(): String {
-        return "$name (${team.toString()[0]})"
+        return "$pieceType (${team.toString()[0]})"
     }
 
     fun getId(): String {

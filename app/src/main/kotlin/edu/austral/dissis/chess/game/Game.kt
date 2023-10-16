@@ -95,7 +95,7 @@ class Game(
     private fun convertPiece(coordinate: Coordinate, modifiedBoard: Board,newPiece: Piece): Board {
         val oldPiece: Piece = modifiedBoard.getPiece(coordinate) ?: throw NoSuchElementException("No piece found")
         return modifiedBoard.addPiece(coordinate, oldPiece.copy(
-            name = newPiece.name,
+            pieceType = newPiece.pieceType,
             team = newPiece.team,
             pieceRule = newPiece.pieceRule,
             id = oldPiece.getId()

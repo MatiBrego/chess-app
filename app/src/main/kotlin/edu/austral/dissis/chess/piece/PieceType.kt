@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.piece.enum
+package edu.austral.dissis.chess.piece
 
 enum class PieceType {
     KING,

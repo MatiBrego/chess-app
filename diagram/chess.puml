@@ -1,0 +1,121 @@
+@startuml
+
+'Board Module
+class Board {
+    movePiece(Coordinate from, Coordinate to): Board
+}
+
+class Coordinate {
+    int row
+    int column
+}
+
+Board --> Coordinate
+Board --> Piece
+'Board Module
+
+'Piece Module
+class Piece {
+    PieceType pieceType
+    Rule pieceRule
+    Team team
+    String id
+    int moveCount
+
+    validateMove(Move move, Board board)
+}
+
+enum Team {
+    WHITE
+    BLACK
+}
+
+enum PieceType {
+        KING
+        QUEEN
+        ROOK
+        BISHOP
+        KNIGHT
+        PAWN
+}
+Piece --> PieceType
+Piece --> Team
+'Piece Module
+
+'Rule Module
+interface Rule {
+    validateMove(Move move, Board board): RuleResult
+}
+
+class AndRule implements Rule {
+    List<Rule> rules
+}
+
+class OrRule implements Rule {
+    List<Rule> rules
+}
+
+class PerformActionRule implements Rule {
+    List<Action> actions
+}
+
+class NormalRule implements Rule {}
+
+Piece --> Rule
+Rule -> Move
+PerformActionRule --> Action
+Rule --> RuleResult
+'Rule Module
+
+'Result Module
+interface RuleResult {}
+
+class ValidResult implements RuleResult{}
+class InvalidResult implements RuleResult{
+    String message
+}
+class ValidWithExecutionResult implements RuleResult{
+    List<Action> actions
+}
+
+interface MoveResult {}
+
+class SuccessfulResult implements MoveResult {}
+class UnsuccessfulResult implements MoveResult{
+    String message
+}
+class EndOfGameResult implements MoveResult {
+    Team winner
+}
+
+interface Action {}
+class ApplyMove implements Action {}
+class ConvertPiece implements Action {}
+class RemovePiece implements Action {}
+'Result Module
+
+'Game Module
+class Game {
+    Board board
+    Team turn
+    List<Rule> rules
+    CheckMateValidator checkMateRule
+    move(Coordinate from, Coordinate to): MoveResult
+}
+
+class Move {
+    Coordinate from
+    Coordinate to
+    Piece piece
+    Team turn
+}
+
+interface CheckMateValidator
+
+Game --> Board
+Game --> Rule
+Game --> CheckMateValidator
+Game --> MoveResult
+'Game Module
+
+@enduml

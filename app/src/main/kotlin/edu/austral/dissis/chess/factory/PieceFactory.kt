@@ -2,7 +2,7 @@ package edu.austral.dissis.chess.factory
 
 import edu.austral.dissis.chess.piece.Piece
 import edu.austral.dissis.chess.piece.Team
-import edu.austral.dissis.chess.piece.enum.PieceType
+import edu.austral.dissis.chess.piece.PieceType
 import edu.austral.dissis.chess.result.action.ApplyMove
 import edu.austral.dissis.chess.result.action.ConvertPiece
 import edu.austral.dissis.chess.result.action.RelativePosition
@@ -89,8 +89,6 @@ fun createQueen(team: Team): Piece {
         team
     )
 }
-
-
 
 fun createKing(team: Team): Piece {
     return Piece(
