@@ -1,11 +1,11 @@
 package edu.austral.dissis.chess.game
 
 import edu.austral.dissis.chess.board.Coordinate
+import edu.austral.dissis.chess.factory.rookInCenterBlockedByTeam
 import org.junit.jupiter.api.Test
 import edu.austral.dissis.chess.result.move.GameRuleViolationResult
 import edu.austral.dissis.chess.rule.game.IsOccupiedByTeamValidator
 import edu.austral.dissis.chess.util.game.TestGameGenerator
-import util.startingposition.rook.RookInCenterBlockedByTeam
 import kotlin.test.assertTrue
 
 class OccupiedRuleTest {
@@ -13,7 +13,7 @@ class OccupiedRuleTest {
     @Test
     fun `test occupied coordinate`(){
         val game = gameGenerator.generate(
-            RookInCenterBlockedByTeam(),
+            rookInCenterBlockedByTeam(),
             listOf(IsOccupiedByTeamValidator())
         )
 

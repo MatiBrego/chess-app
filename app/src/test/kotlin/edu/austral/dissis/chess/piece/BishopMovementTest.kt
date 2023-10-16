@@ -1,13 +1,12 @@
 package edu.austral.dissis.chess.piece
 
 import edu.austral.dissis.chess.board.Coordinate
+import edu.austral.dissis.chess.factory.bishopInCenter
+import edu.austral.dissis.chess.factory.bishopInCenterBlocked
 import edu.austral.dissis.chess.result.move.PieceRuleViolationResult
 import edu.austral.dissis.chess.result.move.SuccessfulResult
 import edu.austral.dissis.chess.util.game.TestGameGenerator
-import util.startingposition.bishop.BishopInCenter
-import util.startingposition.bishop.BishopInCenterBlocked
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class BishopMovementTest {
@@ -16,7 +15,7 @@ class BishopMovementTest {
 
     @Test
     fun `test valid bishop moves for bishop in center without obstacle`() {
-        val game = gameGenerator.generate(BishopInCenter(), emptyList())
+        val game = gameGenerator.generate(bishopInCenter(), emptyList())
         val bishopPosition = Coordinate(3, 3)
 
         // Valid moves along the primary diagonal (from top-left to bottom-right)
@@ -49,7 +48,7 @@ class BishopMovementTest {
 
     @Test
     fun `test invalid bishop moves for bishop in center without obstacle`() {
-        val game = gameGenerator.generate(BishopInCenter(), emptyList())
+        val game = gameGenerator.generate(bishopInCenter(), emptyList())
         val bishopPosition = Coordinate(3, 3)
 
         // Invalid moves for row 0
@@ -97,7 +96,7 @@ class BishopMovementTest {
 
     @Test
     fun `test invalid bishop moves for bishop in center with obstacles in all directions`(){
-        val game = gameGenerator.generate(BishopInCenterBlocked())
+        val game = gameGenerator.generate(bishopInCenterBlocked())
         val bishopPosition = Coordinate(3, 3)
 
         // Invalid moves along the primary diagonal (from top-left to bottom-right)

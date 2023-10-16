@@ -1,12 +1,11 @@
 package edu.austral.dissis.chess.game
 
 import edu.austral.dissis.chess.board.Coordinate
+import edu.austral.dissis.chess.factory.kingInCenterWithRookAndEnemyRook
 import edu.austral.dissis.chess.result.move.GameRuleViolationResult
 import edu.austral.dissis.chess.rule.game.IsNotCheckValidator
 import edu.austral.dissis.chess.util.game.TestGameGenerator
-import util.startingposition.king.KingInCenterWithRookAndEnemyRook
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class LeavesInCheckRuleTest {
@@ -15,7 +14,7 @@ class LeavesInCheckRuleTest {
     @Test
     fun `test leaves in check after team move`(){
         val game = gameGenerator.generate(
-            KingInCenterWithRookAndEnemyRook(),
+            kingInCenterWithRookAndEnemyRook(),
             listOf(
                 IsNotCheckValidator()
             )

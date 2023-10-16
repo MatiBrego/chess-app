@@ -1,11 +1,11 @@
 package edu.austral.dissis.chess.piece
 
 import edu.austral.dissis.chess.board.Coordinate
+import edu.austral.dissis.chess.factory.rookInCenter
+import edu.austral.dissis.chess.factory.rookInCenterBlocked
 import edu.austral.dissis.chess.result.move.PieceRuleViolationResult
 import edu.austral.dissis.chess.result.move.SuccessfulResult
 import edu.austral.dissis.chess.util.game.TestGameGenerator
-import util.startingposition.rook.RookInCenter
-import util.startingposition.rook.RookInCenterBlocked
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
@@ -13,7 +13,7 @@ class RookMovementTest {
     private val gameGenerator = TestGameGenerator()
     @Test
     fun `test valid rook moves for rook in center without obstacle`() {
-        val game = gameGenerator.generate(RookInCenter())
+        val game = gameGenerator.generate(rookInCenter())
         val rookPosition = Coordinate(3, 3)
 
         // Valid moves along the column (vertical movement)
@@ -38,7 +38,7 @@ class RookMovementTest {
 
     @Test
     fun `test invalid rook moves for rook in center without obstacle`() {
-        val game = gameGenerator.generate(RookInCenter())
+        val game = gameGenerator.generate(rookInCenter())
         val rookPosition = Coordinate(3, 3)
 
         // Invalid moves in the first row (You've covered this row, but just for completeness)
@@ -99,7 +99,7 @@ class RookMovementTest {
 
     @Test
     fun `test invalid rook moves for rook in center with obstacles in all directions`(){
-        val game = gameGenerator.generate(RookInCenterBlocked())
+        val game = gameGenerator.generate(rookInCenterBlocked())
         val rookPosition = Coordinate(3, 3)
 
         // Invalid moves along the column (vertical movement)

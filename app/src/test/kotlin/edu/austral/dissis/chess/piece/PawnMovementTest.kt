@@ -1,14 +1,13 @@
 package edu.austral.dissis.chess.piece
 
 import edu.austral.dissis.chess.board.Coordinate
+import edu.austral.dissis.chess.factory.pawnInCenter
+import edu.austral.dissis.chess.factory.pawnInCenterBlocked
 import edu.austral.dissis.chess.game.Game
 import edu.austral.dissis.chess.result.move.PieceRuleViolationResult
 import edu.austral.dissis.chess.result.move.SuccessfulResult
 import edu.austral.dissis.chess.util.game.TestGameGenerator
-import util.startingposition.pawn.PawnInCenter
-import util.startingposition.pawn.PawnInCenterBlocked
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class PawnMovementTest {
@@ -16,7 +15,7 @@ class PawnMovementTest {
 
     @Test
     fun `test valid pawn moves for pawn in center without obstacle`() {
-        val game = gameGenerator.generate(PawnInCenter())
+        val game = gameGenerator.generate(pawnInCenter())
         val pawnPosition = Coordinate(3, 3)
 
         // Valid moves for white pawn
@@ -25,7 +24,7 @@ class PawnMovementTest {
 
     @Test
     fun `test invalid pawn moves for pawn in center without obstacle`(){
-        val game = gameGenerator.generate(PawnInCenter())
+        val game = gameGenerator.generate(pawnInCenter())
         val pawnPosition = Coordinate(3, 3)
 
         // invalid moves for white pawn (Some)
@@ -40,7 +39,7 @@ class PawnMovementTest {
 
     @Test
     fun `test first move pawn rule`(){
-        val game = gameGenerator.generate(PawnInCenter())
+        val game = gameGenerator.generate(pawnInCenter())
         val startingPawnPosition = Coordinate(3, 3)
         val afterMovePawnPosition = Coordinate(4, 3)
 
@@ -58,7 +57,7 @@ class PawnMovementTest {
 
     @Test
     fun `test pawn diagonal move rule`(){
-        val game = gameGenerator.generate(PawnInCenterBlocked())
+        val game = gameGenerator.generate(pawnInCenterBlocked())
         val pawnPosition = Coordinate(3, 3)
 
         assertTrue(game.move(pawnPosition, Coordinate(4, 3)) is PieceRuleViolationResult)

@@ -1,7 +1,6 @@
 package edu.austral.dissis.chess.rule.orientation
 
 import edu.austral.dissis.chess.board.Board
-import edu.austral.dissis.chess.board.NormalBoard
 import edu.austral.dissis.chess.game.Move
 import edu.austral.dissis.chess.result.rule.InvalidResult
 import edu.austral.dissis.chess.result.rule.RuleResult

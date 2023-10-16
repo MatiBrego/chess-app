@@ -1,13 +1,12 @@
 package edu.austral.dissis.chess.piece
 
 import edu.austral.dissis.chess.board.Coordinate
+import edu.austral.dissis.chess.factory.knightInCenter
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import edu.austral.dissis.chess.result.move.PieceRuleViolationResult
 import edu.austral.dissis.chess.result.move.SuccessfulResult
 import edu.austral.dissis.chess.util.game.TestGameGenerator
-import util.startingposition.knight.KnightInCenter
-import kotlin.test.assertEquals
 
 class KnightMovementTest {
 
@@ -15,7 +14,7 @@ class KnightMovementTest {
 
     @Test
     fun `test valid knight moves for knight in center without obstacle`(){
-        val game = gameGenerator.generate(KnightInCenter())
+        val game = gameGenerator.generate(knightInCenter())
         val knightPosition = Coordinate(3, 3)
 
         // Valid moves along the L shape
@@ -31,7 +30,7 @@ class KnightMovementTest {
 
     @Test
     fun `test invalid knight moves for knight in center without obstacle`(){
-        val game = gameGenerator.generate(KnightInCenter())
+        val game = gameGenerator.generate(knightInCenter())
         val knightPosition = Coordinate(3, 3)
 
         // Invalid moves row 0

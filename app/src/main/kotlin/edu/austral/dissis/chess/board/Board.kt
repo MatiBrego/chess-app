@@ -2,22 +2,45 @@ package edu.austral.dissis.chess.board
 
 import edu.austral.dissis.chess.piece.Piece
 
-interface Board {
-    fun movePiece(from: Coordinate, to: Coordinate): Board
+class Board(
+    private val positions: Map<Coordinate, Piece>,
+    private val boardSize: BoardSize = BoardSize(8, 8)
+){
+    fun movePiece(from: Coordinate, to: Coordinate): Board{
+        val piece: Piece = positions[from]?: throw NoSuchElementException("No piece at $from")
 
-    fun removePiece(from: Coordinate): Board
+        return Board(positions + Pair(to, piece.copy(
+            moveCount = piece.getMoveCount() + 1,
+            id = piece.getId()
+        )
+        ) - from)
+    }
 
-    fun getPiece(coordinate: Coordinate): Piece?
+    fun removePiece(from: Coordinate): Board {
+        return Board(positions - from)
+    }
 
-    fun addPiece(coordinate: Coordinate, piece: Piece): Board
+    fun getPiece(coordinate: Coordinate): Piece? {
+        return positions[coordinate]
+    }
 
-    fun hasCoordinate(coordinate: Coordinate): Boolean
+    fun addPiece(coordinate: Coordinate, piece: Piece): Board {
+        return Board(positions + Pair(coordinate, piece))
+    }
 
-    fun print()
+    fun hasCoordinate(coordinate: Coordinate): Boolean {
+        return positions.containsKey(coordinate)
+    }
 
-    fun getOccupiedPositions(): List<Coordinate>
+    fun getOccupiedPositions(): List<Coordinate> {
+        return positions.keys.toList()
+    }
 
-    fun getColumnQuantity(): Int
+    fun getColumnQuantity(): Int {
+        return boardSize.getColumns()
+    }
 
-    fun getRowQuantity(): Int
+    fun getRowQuantity(): Int {
+        return boardSize.getRows()
+    }
 }
