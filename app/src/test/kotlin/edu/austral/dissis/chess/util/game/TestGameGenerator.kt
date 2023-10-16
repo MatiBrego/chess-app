@@ -5,6 +5,7 @@ import edu.austral.dissis.chess.game.Game
 import edu.austral.dissis.chess.game.checkmate.FakeValidator
 import edu.austral.dissis.chess.piece.Team
 import edu.austral.dissis.chess.rule.Rule
+import edu.austral.dissis.chess.rule.game.PieceIsPresentValidator
 
 class TestGameGenerator {
     fun generate(
@@ -14,7 +15,7 @@ class TestGameGenerator {
         return Game(
             board,
             Team.WHITE,
-            rules,
+            listOf(PieceIsPresentValidator()) + rules,
             FakeValidator()
         )
     }

@@ -22,6 +22,7 @@ private fun createBoard(): Board {
 
 private fun createNormalRules(): List<Rule> {
     return listOf(
+        PieceIsPresentValidator(),
         IsYourTurnValidator(),
         IsOccupiedByTeamValidator(),
         IsNotCheckValidator()

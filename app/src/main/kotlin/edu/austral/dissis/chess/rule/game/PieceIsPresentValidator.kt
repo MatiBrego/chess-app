@@ -7,12 +7,9 @@ import edu.austral.dissis.chess.result.rule.RuleResult
 import edu.austral.dissis.chess.result.rule.ValidResult
 import edu.austral.dissis.chess.rule.Rule
 
-class IsYourTurnValidator: Rule {
-    private val message = "It's not your turn"
+class PieceIsPresentValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
-        val fromPiece = board.getPiece(move.getFrom()) ?: return InvalidResult("No piece in that coordinate")
-
-        return if(fromPiece.team == move.getTurn()) ValidResult
-        else InvalidResult(message)
+        return if (board.getPiece(move.getFrom()) == null) InvalidResult("No piece in that coordinate")
+        else ValidResult
     }
 }

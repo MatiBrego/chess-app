@@ -9,7 +9,9 @@ import edu.austral.dissis.chess.rule.Rule
 
 class IsFirstMoveValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
-        if (move.getPiece().getMoveCount() == 0) return ValidResult
+        val fromPiece = board.getPiece(move.getFrom()) ?: return InvalidResult("No piece in that coordinate")
+
+        if (fromPiece.getMoveCount() == 0) return ValidResult
         return InvalidResult()
     }
 }

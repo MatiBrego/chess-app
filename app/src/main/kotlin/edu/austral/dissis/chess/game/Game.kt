@@ -20,14 +20,12 @@ class Game(
 ) {
 
     fun move(from: Coordinate, to: Coordinate): MoveResult {
-        val piece = this.board.getPiece(from) ?: return NoPieceInCoordinateResult
-
-        val move = Move(from, to, piece, turn)
+        val move = Move(from, to, turn)
 
         val gameValidationResult = validateGameRules(move)
         if (gameValidationResult !is SuccessfulResult) return gameValidationResult
 
-        val pieceValidationResult = validatePieceRules(move, piece)
+        val pieceValidationResult = validatePieceRules(move)
         if (pieceValidationResult !is SuccessfulResult) return pieceValidationResult
 
         if (isCheckMate(pieceValidationResult.game.getBoard())) return EndOfGameResult(turn)
@@ -54,7 +52,9 @@ class Game(
        return SuccessfulResult(this)
     }
 
-    private fun validatePieceRules(move: Move, piece: Piece): MoveResult {
+    private fun validatePieceRules(move: Move): MoveResult {
+        val piece = board.getPiece(move.getFrom()) ?: throw NoSuchElementException("No piece found")
+
         return when (val result = piece.validateMove(move, board)){
             ValidResult -> executeActions(listOf(ApplyMove(RelativePosition(), RelativePosition(move.getTo().row - move.getFrom().row, move.getTo().column - move.getFrom().column))), move.getFrom())
             is ValidWithExecutionResult -> executeActions(result.getActions(), move.getFrom())

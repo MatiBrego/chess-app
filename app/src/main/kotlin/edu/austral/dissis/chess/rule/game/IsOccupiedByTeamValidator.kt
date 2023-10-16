@@ -10,8 +10,10 @@ import edu.austral.dissis.chess.rule.Rule
 class IsOccupiedByTeamValidator: Rule {
     private val message = "That square is occupied by a piece of your team"
     override fun validateMove(move: Move, board: Board): RuleResult {
+        val fromPiece = board.getPiece(move.getFrom()) ?: return InvalidResult("No piece in that coordinate")
+
         board.getPiece(move.getTo())?.let {
-            if(it.team == move.getPiece().team) return InvalidResult(message)
+            if(it.team == fromPiece.team) return InvalidResult(message)
             else return ValidResult
         }
         return ValidResult    }
