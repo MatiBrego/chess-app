@@ -5,8 +5,7 @@ import edu.austral.dissis.chess.board.Coordinate
 import edu.austral.dissis.chess.executor.MoveExecutor
 import edu.austral.dissis.chess.executor.NormalExecutor
 import edu.austral.dissis.chess.game.checkmate.CheckMateValidator
-import edu.austral.dissis.chess.game.checkmate.NormalValidator
-import edu.austral.dissis.chess.piece.Piece
+import edu.austral.dissis.chess.game.checkmate.NormalCheckMateValidator
 import edu.austral.dissis.chess.piece.Team
 import edu.austral.dissis.chess.result.action.*
 import edu.austral.dissis.chess.result.move.*
@@ -19,7 +18,7 @@ class Game(
     private var board: Board,
     private val turn: Team = Team.WHITE,
     private val rules: List<Rule>,
-    private val checkMateRule: CheckMateValidator = NormalValidator(),
+    private val checkMateRule: CheckMateValidator = NormalCheckMateValidator(),
     private val moveExecutor: MoveExecutor = NormalExecutor()
 ) {
 

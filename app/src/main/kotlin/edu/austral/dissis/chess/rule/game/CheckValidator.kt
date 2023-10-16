@@ -10,22 +10,34 @@ import edu.austral.dissis.chess.result.rule.ValidResult
 import edu.austral.dissis.chess.result.rule.ValidWithExecutionResult
 
 class CheckValidator {
-    fun isCheck(board: Board, team: Team): Boolean {
-        val kingPosition = getKingCoords(board, team)?: return true
-        val kingsTeam: Team = board.getPiece(kingPosition)?.team ?: throw NoSuchElementException("No king found")
+    fun isCheck(board: Board, kingsTeam: Team): Boolean {
+        val kingPosition = getKingCoords(board, kingsTeam)?: throw NoSuchElementException("No king found")
+        val enemyPieceCoordinates = board.getOccupiedPositions()
 
-        board.getOccupiedPositions().forEach { coordinate ->
-            if (board.getPiece(coordinate)?.team != kingsTeam) {
-                val piece = board.getPiece(coordinate) ?: throw NoSuchElementException("No piece found")
-                when (
-                    piece.validateMove(
-                        Move(coordinate, kingPosition, kingsTeam), board
-                    )
-                ) {
-                    is ValidResult -> return true
-                    is ValidWithExecutionResult -> return true
-                    is InvalidResult -> {} // (continue)
-                }
+        for(coordinate in enemyPieceCoordinates) {
+            if (pieceAttacksKing(board, coordinate, kingsTeam, kingPosition)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun pieceAttacksKing(
+        board: Board,
+        coordinate: Coordinate,
+        kingsTeam: Team,
+        kingPosition: Coordinate
+    ): Boolean {
+        if (board.getPiece(coordinate)?.team != kingsTeam) {
+            val piece = board.getPiece(coordinate) ?: throw NoSuchElementException("No piece found")
+            when (
+                piece.validateMove(
+                    Move(coordinate, kingPosition, kingsTeam), board
+                )
+            ) {
+                is ValidResult -> return true
+                is ValidWithExecutionResult -> return true
+                is InvalidResult -> {} //Continue
             }
         }
         return false

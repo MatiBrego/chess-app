@@ -8,25 +8,39 @@ import edu.austral.dissis.chess.result.rule.ValidResult
 import edu.austral.dissis.chess.rule.Rule
 import edu.austral.dissis.chess.rule.game.CheckValidator
 
-class NormalValidator(
+class NormalCheckMateValidator(
 ): CheckMateValidator {
     private val checkValidator = CheckValidator()
 
     override fun isCheckmate(board: Board, enemyTeam: Team, gameRules: List<Rule>): Boolean {
-        val pieceCoordinates: List<Coordinate> = board.getOccupiedPositions().filter { coordinate ->
-            board.getPiece(coordinate)?.team == enemyTeam }
+        val pieceCoordinates = getAllEnemyTeamCoordinates(board, enemyTeam)
+
         for (pieceCoordinate in pieceCoordinates) {
             val validMoves = findAllValidMoves(pieceCoordinate, board, gameRules)
+
             for (validMove in validMoves) {
-                val boardAfterMove = board.movePiece(validMove.getFrom(), validMove.getTo())
-                if (!checkValidator.isCheck(boardAfterMove, enemyTeam)) {
-                    return false
-                }
+                if (moveIsNotCheck(board, validMove, enemyTeam)) return false
             }
         }
-
         return true
     }
+
+    private fun moveIsNotCheck(
+        board: Board,
+        validMove: Move,
+        enemyTeam: Team
+    ): Boolean {
+        val boardAfterMove = board.movePiece(validMove.getFrom(), validMove.getTo())
+        return !checkValidator.isCheck(boardAfterMove, enemyTeam)
+    }
+
+    private fun getAllEnemyTeamCoordinates(
+        board: Board,
+        enemyTeam: Team
+    ) = board.getOccupiedPositions().filter { coordinate ->
+        board.getPiece(coordinate)?.team == enemyTeam
+    }
+
 
     private fun findAllValidMoves(pieceCoordinate: Coordinate, board: Board, gameRules: List<Rule>): List<Move>{
         val piece = board.getPiece(pieceCoordinate) ?: throw NoSuchElementException("No piece found")
