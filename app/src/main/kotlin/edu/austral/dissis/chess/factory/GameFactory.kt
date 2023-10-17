@@ -19,7 +19,7 @@ fun createNormalGame(): Game {
 }
 
 private fun createBoard(): Board {
-    return createNormalStartingBoard()
+    return createBoardWithSpecialPieces()
 }
 
 private fun createNormalRules(): List<Rule> {

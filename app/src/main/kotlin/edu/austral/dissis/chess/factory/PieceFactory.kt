@@ -199,6 +199,46 @@ fun createPawn(team: Team): Piece {
         ),
         team
     )
+}
 
+fun createArchbishop(team: Team): Piece{
+    return Piece(
+            PieceType.ARCHBISHOP,
+            OrRule(
+                listOf(
+                    AndRule(
+                        listOf(
+                            DiagonalValidator(),
+                            DiagonalObstacleValidator()
+                        )
+                    ),
+                    LValidator()
+                )
+            ),
+            team
+    )
+}
 
+fun createChancellor(team: Team): Piece {
+    return Piece(
+        PieceType.CHANCELLOR,
+        OrRule(
+            listOf(
+                AndRule(
+                    listOf(
+                        HorizontalValidator(),
+                        HorizontalObstacleValidator()
+                    )
+                ),
+                AndRule(
+                    listOf(
+                        VerticalValidator(),
+                        VerticalObstacleValidator()
+                    )
+                ),
+                LValidator()
+            )
+        ),
+        team
+    )
 }

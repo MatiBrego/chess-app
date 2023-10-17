@@ -71,6 +71,8 @@ class Adapter(var game: Game): GameEngine{
         PieceType.PAWN -> "pawn"
         PieceType.QUEEN -> "queen"
         PieceType.ROOK -> "rook"
+        PieceType.ARCHBISHOP -> "archbishop"
+        PieceType.CHANCELLOR -> "chancellor"
     }
 
     private fun getCurrentPlayerColor(): PlayerColor {

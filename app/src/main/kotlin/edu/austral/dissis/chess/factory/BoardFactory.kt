@@ -51,3 +51,41 @@ fun castleSetupBoard(): Map<Coordinate, Piece> {
         Pair(Coordinate(8, 5), createKing(Team.BLACK))
     )
 }
+
+fun createBoardWithSpecialPieces(): Board {
+    val map: MutableMap<Coordinate, Piece> = mutableMapOf()
+
+    // Pawn
+    for (i in 1..8) {
+        map[Coordinate(2, i)] = createPawn(Team.WHITE)
+        map[Coordinate(7, i)] = createPawn(Team.BLACK)
+    }
+
+    // Chancellor
+    map[Coordinate(1, 1)] = createChancellor(Team.WHITE)
+    map[Coordinate(1, 8)] = createChancellor(Team.WHITE)
+    map[Coordinate(8, 1)] = createChancellor(Team.BLACK)
+    map[Coordinate(8, 8)] = createChancellor(Team.BLACK)
+
+    // Knight
+    map[Coordinate(1, 2)] = createKnight(Team.WHITE)
+    map[Coordinate(1, 7)] = createKnight(Team.WHITE)
+    map[Coordinate(8, 2)] = createKnight(Team.BLACK)
+    map[Coordinate(8, 7)] = createKnight(Team.BLACK)
+
+    // Archbishop
+    map[Coordinate(1, 3)] = createArchbishop(Team.WHITE)
+    map[Coordinate(1, 6)] = createArchbishop(Team.WHITE)
+    map[Coordinate(8, 3)] = createArchbishop(Team.BLACK)
+    map[Coordinate(8, 6)] = createArchbishop(Team.BLACK)
+
+    // Queen
+    map[Coordinate(1, 4)] = createQueen(Team.WHITE)
+    map[Coordinate(8, 4)] = createQueen(Team.BLACK)
+
+    // King
+    map[Coordinate(1, 5)] = createKing(Team.WHITE)
+    map[Coordinate(8, 5)] = createKing(Team.BLACK)
+
+    return Board(map)
+}
