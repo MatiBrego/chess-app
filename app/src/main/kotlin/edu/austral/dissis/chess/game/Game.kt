@@ -4,8 +4,8 @@ import edu.austral.dissis.chess.board.Board
 import edu.austral.dissis.chess.board.Coordinate
 import edu.austral.dissis.chess.executor.MoveExecutor
 import edu.austral.dissis.chess.executor.NormalExecutor
-import edu.austral.dissis.chess.game.checkmate.CheckMateValidator
-import edu.austral.dissis.chess.game.checkmate.NormalCheckMateValidator
+import edu.austral.dissis.chess.wincondition.WinningConditionValidator
+import edu.austral.dissis.chess.wincondition.NormalCheckMateValidator
 import edu.austral.dissis.chess.piece.Team
 import edu.austral.dissis.chess.result.action.*
 import edu.austral.dissis.chess.result.move.*
@@ -18,7 +18,7 @@ class Game(
     private var board: Board,
     private val turn: Team = Team.WHITE,
     private val rules: List<Rule>,
-    private val checkMateRule: CheckMateValidator = NormalCheckMateValidator(),
+    private val winningConditionValidator: WinningConditionValidator = NormalCheckMateValidator(),
     private val moveExecutor: MoveExecutor = NormalExecutor()
 ) {
 
@@ -72,7 +72,7 @@ class Game(
                 modifiedBoard,
                 getEnemyTeam(),
                 rules,
-                checkMateRule,
+                winningConditionValidator,
                 moveExecutor
             )
         )
@@ -85,7 +85,7 @@ class Game(
                 modifiedBoard,
                 getEnemyTeam(),
                 rules,
-                checkMateRule,
+                winningConditionValidator,
                 moveExecutor
             )
         )
@@ -99,6 +99,6 @@ class Game(
     }
 
     private fun isCheckMate(board: Board): Boolean{
-        return checkMateRule.isCheckmate(board, getEnemyTeam(), rules)
+        return winningConditionValidator.isWin(board, getEnemyTeam(), rules)
     }
 }

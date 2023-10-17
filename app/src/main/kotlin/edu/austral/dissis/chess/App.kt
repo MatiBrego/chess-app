@@ -4,6 +4,7 @@
 package edu.austral.dissis.chess
 
 import edu.austral.dissis.chess.adapter.Adapter
+import edu.austral.dissis.chess.factory.createAlternativeGame
 import edu.austral.dissis.chess.factory.createNormalGame
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
@@ -19,7 +20,7 @@ fun main() {
 }
 
 class ChessGameApplication : Application() {
-    private val gameEngine = Adapter(createNormalGame())
+    private val gameEngine = Adapter(createAlternativeGame())
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {

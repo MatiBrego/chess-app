@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.game.checkmate
+package edu.austral.dissis.chess.wincondition
 
 import edu.austral.dissis.chess.board.Board
 import edu.austral.dissis.chess.board.Coordinate
@@ -9,10 +9,10 @@ import edu.austral.dissis.chess.rule.Rule
 import edu.austral.dissis.chess.rule.game.CheckValidator
 
 class NormalCheckMateValidator(
-): CheckMateValidator {
+): WinningConditionValidator {
     private val checkValidator = CheckValidator()
 
-    override fun isCheckmate(board: Board, enemyTeam: Team, gameRules: List<Rule>): Boolean {
+    override fun isWin(board: Board, enemyTeam: Team, gameRules: List<Rule>): Boolean {
         val pieceCoordinates = getAllEnemyTeamCoordinates(board, enemyTeam)
 
         for (pieceCoordinate in pieceCoordinates) {
