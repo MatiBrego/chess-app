@@ -4,7 +4,7 @@ import edu.austral.dissis.chess.board.Coordinate
 import edu.austral.dissis.chess.factory.knightInCenter
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import edu.austral.dissis.chess.result.move.PieceRuleViolationResult
+import edu.austral.dissis.chess.result.move.UnsuccessfulResult
 import edu.austral.dissis.chess.result.move.SuccessfulResult
 import edu.austral.dissis.chess.util.game.TestGameGenerator
 
@@ -35,42 +35,42 @@ class KnightMovementTest {
 
         // Invalid moves row 0
         for (col in listOf(0, 1, 2, 3, 4, 5, 6, 7)){
-            assertTrue(game.move(knightPosition, Coordinate(0, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(knightPosition, Coordinate(0, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves row 1
         for (col in listOf(0, 1, 3, 5, 6, 7)){
-            assertTrue(game.move(knightPosition, Coordinate(1, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(knightPosition, Coordinate(1, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves row 2
         for (col in listOf(0, 2, 3, 4, 6, 7)){
-            assertTrue(game.move(knightPosition, Coordinate(2, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(knightPosition, Coordinate(2, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 3 (knight's own row)
         for (col in listOf(0, 1, 2, 4, 5, 6, 7)) {
-            assertTrue(game.move(knightPosition, Coordinate(3, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(knightPosition, Coordinate(3, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves row 4
         for (col in listOf(0, 2, 3, 4, 6, 7)){
-            assertTrue(game.move(knightPosition, Coordinate(4, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(knightPosition, Coordinate(4, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 5
         for (col in listOf(0, 1, 3, 5, 6, 7)) {
-            assertTrue(game.move(knightPosition, Coordinate(5, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(knightPosition, Coordinate(5, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 6
         for (col in listOf(0, 2, 3, 4, 6, 7)) {
-            assertTrue(game.move(knightPosition, Coordinate(6, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(knightPosition, Coordinate(6, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 7
         for (col in listOf(0, 1, 2, 3, 4, 5, 6, 7)) {
-            assertTrue(game.move(knightPosition, Coordinate(7, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(knightPosition, Coordinate(7, col)) is UnsuccessfulResult)
         }
 
     }

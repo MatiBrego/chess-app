@@ -3,7 +3,7 @@ package edu.austral.dissis.chess.game
 import edu.austral.dissis.chess.board.Coordinate
 import edu.austral.dissis.chess.factory.rookInCenterBlockedByTeam
 import org.junit.jupiter.api.Test
-import edu.austral.dissis.chess.result.move.GameRuleViolationResult
+import edu.austral.dissis.chess.result.move.UnsuccessfulResult
 import edu.austral.dissis.chess.rule.game.IsOccupiedByTeamValidator
 import edu.austral.dissis.chess.util.game.TestGameGenerator
 import kotlin.test.assertTrue
@@ -19,9 +19,9 @@ class OccupiedRuleTest {
 
         val rookPosition = Coordinate(3,3)
 
-        assertTrue(game.move(rookPosition, Coordinate(3,4)) is GameRuleViolationResult)
-        assertTrue(game.move(rookPosition, Coordinate(3,2)) is GameRuleViolationResult)
-        assertTrue(game.move(rookPosition, Coordinate(4,3)) is GameRuleViolationResult)
-        assertTrue(game.move(rookPosition, Coordinate(2,3)) is GameRuleViolationResult)
+        assertTrue(game.move(rookPosition, Coordinate(3,4)) is UnsuccessfulResult)
+        assertTrue(game.move(rookPosition, Coordinate(3,2)) is UnsuccessfulResult)
+        assertTrue(game.move(rookPosition, Coordinate(4,3)) is UnsuccessfulResult)
+        assertTrue(game.move(rookPosition, Coordinate(2,3)) is UnsuccessfulResult)
     }
 }

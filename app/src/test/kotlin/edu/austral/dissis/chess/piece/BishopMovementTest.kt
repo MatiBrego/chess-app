@@ -3,7 +3,7 @@ package edu.austral.dissis.chess.piece
 import edu.austral.dissis.chess.board.Coordinate
 import edu.austral.dissis.chess.factory.bishopInCenter
 import edu.austral.dissis.chess.factory.bishopInCenterBlocked
-import edu.austral.dissis.chess.result.move.PieceRuleViolationResult
+import edu.austral.dissis.chess.result.move.UnsuccessfulResult
 import edu.austral.dissis.chess.result.move.SuccessfulResult
 import edu.austral.dissis.chess.util.game.TestGameGenerator
 import kotlin.test.Test
@@ -53,42 +53,42 @@ class BishopMovementTest {
 
         // Invalid moves for row 0
         for (col in listOf(2, 3, 4, 5, 7)) {
-            assertTrue(game.move(bishopPosition, Coordinate(0, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(bishopPosition, Coordinate(0, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 1
         for (col in listOf(0, 2, 3, 4, 6, 7)) {
-            assertTrue(game.move(bishopPosition, Coordinate(1, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(bishopPosition, Coordinate(1, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 2
         for (col in listOf(0, 1, 3, 6, 7)) {
-            assertTrue(game.move(bishopPosition, Coordinate(2, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(bishopPosition, Coordinate(2, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 3 (bishop's own row)
         for (col in listOf(0, 1, 2, 4, 5, 6, 7)) {
-            assertTrue(game.move(bishopPosition, Coordinate(3, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(bishopPosition, Coordinate(3, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 4
         for (col in listOf(0, 1, 3, 6, 7)) {  // Exclude Coordinate(4, 4)
-            assertTrue(game.move(bishopPosition, Coordinate(4, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(bishopPosition, Coordinate(4, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for rows 5
         for (col in listOf(0, 2, 3, 4, 6, 7)) {
-            assertTrue(game.move(bishopPosition, Coordinate(5, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(bishopPosition, Coordinate(5, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 6
         for (col in listOf(2, 3, 4, 5, 7)) {
-            assertTrue(game.move(bishopPosition, Coordinate(6, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(bishopPosition, Coordinate(6, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 7
         for (col in listOf(0, 1, 2, 3, 4, 5, 6)) {
-            assertTrue(game.move(bishopPosition, Coordinate(7, col)) is PieceRuleViolationResult)
+            assertTrue(game.move(bishopPosition, Coordinate(7, col)) is UnsuccessfulResult)
         }
 
 
@@ -102,22 +102,22 @@ class BishopMovementTest {
         // Invalid moves along the primary diagonal (from top-left to bottom-right)
 
         // Up and left
-        assertTrue(game.move(bishopPosition, Coordinate(1,1)) is PieceRuleViolationResult)
-        assertTrue(game.move(bishopPosition, Coordinate(0,0)) is PieceRuleViolationResult)
+        assertTrue(game.move(bishopPosition, Coordinate(1,1)) is UnsuccessfulResult)
+        assertTrue(game.move(bishopPosition, Coordinate(0,0)) is UnsuccessfulResult)
 
         // Down and right
-        assertTrue(game.move(bishopPosition, Coordinate(5,5)) is PieceRuleViolationResult)
-        assertTrue(game.move(bishopPosition, Coordinate(6,6)) is PieceRuleViolationResult)
-        assertTrue(game.move(bishopPosition, Coordinate(7,7)) is PieceRuleViolationResult)
+        assertTrue(game.move(bishopPosition, Coordinate(5,5)) is UnsuccessfulResult)
+        assertTrue(game.move(bishopPosition, Coordinate(6,6)) is UnsuccessfulResult)
+        assertTrue(game.move(bishopPosition, Coordinate(7,7)) is UnsuccessfulResult)
 
         // Invalid moves along the secondary diagonal (from bottom-left to top-right)
 
         // Up and right
-        assertTrue(game.move(bishopPosition, Coordinate(5,1)) is PieceRuleViolationResult)
-        assertTrue(game.move(bishopPosition, Coordinate(6,0)) is PieceRuleViolationResult)
+        assertTrue(game.move(bishopPosition, Coordinate(5,1)) is UnsuccessfulResult)
+        assertTrue(game.move(bishopPosition, Coordinate(6,0)) is UnsuccessfulResult)
 
         // Down and left
-        assertTrue(game.move(bishopPosition, Coordinate(1,5)) is PieceRuleViolationResult)
-        assertTrue(game.move(bishopPosition, Coordinate(0,6)) is PieceRuleViolationResult)
+        assertTrue(game.move(bishopPosition, Coordinate(1,5)) is UnsuccessfulResult)
+        assertTrue(game.move(bishopPosition, Coordinate(0,6)) is UnsuccessfulResult)
     }
 }

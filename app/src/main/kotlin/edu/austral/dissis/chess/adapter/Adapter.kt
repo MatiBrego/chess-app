@@ -17,10 +17,8 @@ class Adapter(var game: Game): GameEngine{
 
         return when(val result = game.move(from, to)){
             is SuccessfulResult -> {getNewGameState(result)}
-            is GameRuleViolationResult -> {InvalidMove(result.getMessage())}
-            is PieceRuleViolationResult -> {InvalidMove(result.getMessage())}
+            is UnsuccessfulResult -> {InvalidMove(result.getMessage())}
             is EndOfGameResult -> {GameOver(getPlayerColor(result.winner))}
-            is NoPieceInCoordinateResult -> {InvalidMove("No piece in coordinate")}
         }
     }
 

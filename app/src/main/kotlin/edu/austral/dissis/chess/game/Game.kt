@@ -49,7 +49,7 @@ class Game(
             return when (val result = rule.validateMove(move, board)){
                 ValidResult -> continue
                 is ValidWithExecutionResult -> continue
-                is InvalidResult -> GameRuleViolationResult(result.getMessage())
+                is InvalidResult -> UnsuccessfulResult(result.getMessage())
             }
         }
        return SuccessfulResult(this)
@@ -61,7 +61,7 @@ class Game(
         return when (val result = piece.validateMove(move, board)){
             ValidResult -> executeSingleMove(move, board)
             is ValidWithExecutionResult -> executeActions(result.getActions(), move, board)
-            is InvalidResult -> PieceRuleViolationResult(result.getMessage())
+            is InvalidResult -> UnsuccessfulResult(result.getMessage())
         }
     }
 

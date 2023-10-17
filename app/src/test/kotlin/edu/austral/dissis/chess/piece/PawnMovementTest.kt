@@ -5,7 +5,7 @@ import edu.austral.dissis.chess.factory.pawnInCenter
 import edu.austral.dissis.chess.factory.pawnInCenterBlocked
 import edu.austral.dissis.chess.game.Game
 import edu.austral.dissis.chess.result.move.MoveResult
-import edu.austral.dissis.chess.result.move.PieceRuleViolationResult
+import edu.austral.dissis.chess.result.move.UnsuccessfulResult
 import edu.austral.dissis.chess.result.move.SuccessfulResult
 import edu.austral.dissis.chess.util.game.TestGameGenerator
 import kotlin.test.Test
@@ -29,13 +29,13 @@ class PawnMovementTest {
         val pawnPosition = Coordinate(3, 3)
 
         // invalid moves for white pawn (Some)
-        assertTrue(game.move(pawnPosition, Coordinate(4, 4)) is PieceRuleViolationResult)
-        assertTrue(game.move(pawnPosition, Coordinate(3, 4)) is PieceRuleViolationResult)
-        assertTrue(game.move(pawnPosition, Coordinate(2, 4)) is PieceRuleViolationResult)
-        assertTrue(game.move(pawnPosition, Coordinate(2, 3)) is PieceRuleViolationResult)
-        assertTrue(game.move(pawnPosition, Coordinate(2, 2)) is PieceRuleViolationResult)
-        assertTrue(game.move(pawnPosition, Coordinate(3, 2)) is PieceRuleViolationResult)
-        assertTrue(game.move(pawnPosition, Coordinate(4, 2)) is PieceRuleViolationResult)
+        assertTrue(game.move(pawnPosition, Coordinate(4, 4)) is UnsuccessfulResult)
+        assertTrue(game.move(pawnPosition, Coordinate(3, 4)) is UnsuccessfulResult)
+        assertTrue(game.move(pawnPosition, Coordinate(2, 4)) is UnsuccessfulResult)
+        assertTrue(game.move(pawnPosition, Coordinate(2, 3)) is UnsuccessfulResult)
+        assertTrue(game.move(pawnPosition, Coordinate(2, 2)) is UnsuccessfulResult)
+        assertTrue(game.move(pawnPosition, Coordinate(3, 2)) is UnsuccessfulResult)
+        assertTrue(game.move(pawnPosition, Coordinate(4, 2)) is UnsuccessfulResult)
     }
 
     @Test
@@ -52,8 +52,8 @@ class PawnMovementTest {
         }
 
         assertTrue(game.move(startingPawnPosition, Coordinate(5, 3)) is SuccessfulResult)
-        assertTrue(game.move(startingPawnPosition, Coordinate(6, 3)) is PieceRuleViolationResult)
-        assertTrue(gameAfterPawnMove.move(afterMovePawnPosition, Coordinate(6, 3)) is PieceRuleViolationResult)
+        assertTrue(game.move(startingPawnPosition, Coordinate(6, 3)) is UnsuccessfulResult)
+        assertTrue(gameAfterPawnMove.move(afterMovePawnPosition, Coordinate(6, 3)) is UnsuccessfulResult)
     }
 
     @Test
@@ -61,8 +61,8 @@ class PawnMovementTest {
         val game = gameGenerator.generate(pawnInCenterBlocked())
         val pawnPosition = Coordinate(3, 3)
 
-        assertTrue(game.move(pawnPosition, Coordinate(4, 3)) is PieceRuleViolationResult)
-        assertTrue(game.move(pawnPosition, Coordinate(5, 3)) is PieceRuleViolationResult)
+        assertTrue(game.move(pawnPosition, Coordinate(4, 3)) is UnsuccessfulResult)
+        assertTrue(game.move(pawnPosition, Coordinate(5, 3)) is UnsuccessfulResult)
 
         assertTrue(game.move(pawnPosition, Coordinate(4, 4)) is SuccessfulResult)
         assertTrue(game.move(pawnPosition, Coordinate(4, 2)) is SuccessfulResult)
