@@ -40,8 +40,8 @@ class Adapter(var game: Game): GameEngine{
         return toChessPieces(board.getOccupiedPositions(), board)
     }
 
-    private fun toChessPieces(pieces: List<Coordinate>, board: Board): List<ChessPiece> {
-        return pieces.map {
+    private fun toChessPieces(coordinates: List<Coordinate>, board: Board): List<ChessPiece> {
+        return coordinates.map {
             val piece = board.getPiece(it)!!
             ChessPiece(
                 getId(piece),
