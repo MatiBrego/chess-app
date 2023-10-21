@@ -4,7 +4,6 @@ import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.Coordinate
 import edu.austral.dissis.common.game.Move
 import edu.austral.dissis.common.piece.Piece
-import edu.austral.dissis.chess.result.action.*
 import edu.austral.dissis.common.result.action.*
 
 class NormalExecutor: MoveExecutor {

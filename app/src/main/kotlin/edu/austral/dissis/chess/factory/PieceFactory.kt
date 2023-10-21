@@ -116,7 +116,6 @@ fun createKing(team: Team): Piece {
                         LeftValidator(),
                         PerformActionRule(
                             listOf(
-                                ApplyMove(RelativePosition(), RelativePosition(0, -2)),
                                 ApplyMove(RelativePosition(0, -4), RelativePosition(0, -1)),
                             )
                         )
@@ -131,7 +130,6 @@ fun createKing(team: Team): Piece {
                         RightValidator(),
                         PerformActionRule(
                             listOf(
-                                ApplyMove(RelativePosition(0, 0), RelativePosition(0, 2)),
                                 ApplyMove(RelativePosition(0, 3), RelativePosition(0, 1)),
                             )
                         )
@@ -165,7 +163,6 @@ fun createPawn(team: Team): Piece {
                         IsOpposingRowValidator(),
                         PerformActionRule(
                             listOf(
-                                ApplyMove(RelativePosition(0, 0), RelativePosition(1, 0)),
                                 ConvertPiece(RelativePosition(1, 0), createQueen(team))
                             )
                         )

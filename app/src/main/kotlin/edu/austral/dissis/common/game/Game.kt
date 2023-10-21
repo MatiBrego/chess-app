@@ -82,7 +82,8 @@ class Game(
     }
 
     private fun executeActions(actions: List<Action>, move: Move, board: Board): SuccessfulResult {
-        val modifiedBoard: Board = moveExecutor.executeActions(actions, move, board)
+        var modifiedBoard: Board = moveExecutor.executeSingleMove(move, board)
+            modifiedBoard = moveExecutor.executeActions(actions, move, modifiedBoard)
         return SuccessfulResult(
             Game(
                 modifiedBoard,
