@@ -15,9 +15,9 @@ class RelativePosition(
         return column
     }
 
-    fun getAbsolutePosition(reference: Coordinate): Coordinate{
+    fun getAbsolutePosition(reference: Coordinate, isForwardPositive: Boolean): Coordinate{
         return Coordinate(
-            reference.row + row,
+            reference.row + row * if (isForwardPositive) 1 else -1,
             reference.column + column
         )
     }

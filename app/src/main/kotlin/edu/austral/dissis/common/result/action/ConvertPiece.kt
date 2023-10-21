@@ -9,8 +9,8 @@ class ConvertPiece(
     private val from: RelativePosition,
     private val newPiece: Piece
     ): Action {
-    fun getFrom(reference: Coordinate): Coordinate {
-        return from.getAbsolutePosition(reference)
+    fun getFrom(reference: Coordinate, isForwardPositive: Boolean): Coordinate {
+        return from.getAbsolutePosition(reference, isForwardPositive)
     }
 
     fun getNewPiece(): Piece {

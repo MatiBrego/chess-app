@@ -7,11 +7,11 @@ class ApplyMove(
     private val from: RelativePosition = RelativePosition(),
     private val to: RelativePosition = RelativePosition()
 ): Action {
-    fun getFrom(reference: Coordinate): Coordinate {
-        return from.getAbsolutePosition(reference)
+    fun getFrom(reference: Coordinate, isForwardPositive: Boolean): Coordinate {
+        return from.getAbsolutePosition(reference, isForwardPositive)
     }
 
-    fun getTo(reference: Coordinate): Coordinate {
-        return to.getAbsolutePosition(reference)
+    fun getTo(reference: Coordinate, isForwardPositive: Boolean): Coordinate {
+        return to.getAbsolutePosition(reference, isForwardPositive)
     }
 }

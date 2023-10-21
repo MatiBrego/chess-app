@@ -43,12 +43,27 @@ fun createNormalStartingBoard(): Board {
     return Board(map)
 }
 
-fun castleSetupBoard(): Map<Coordinate, Piece> {
-    return mapOf(
+fun castleSetupBoard(): Board {
+    return Board(
+        mapOf(
         Pair(Coordinate(1, 1), createRook(Team.WHITE)),
         Pair(Coordinate(1, 5), createKing(Team.WHITE)),
+        Pair(Coordinate(1, 8), createRook(Team.WHITE)),
         Pair(Coordinate(8, 8), createRook(Team.BLACK)),
-        Pair(Coordinate(8, 5), createKing(Team.BLACK))
+        Pair(Coordinate(8, 5), createKing(Team.BLACK)),
+        Pair(Coordinate(8, 1), createRook(Team.BLACK))
+        )
+    )
+}
+
+fun crowningSetupBoard(): Board {
+    return Board(
+        mapOf(
+            Pair(Coordinate(7, 1), createPawn(Team.WHITE)),
+            Pair(Coordinate(1, 5), createKing(Team.WHITE)),
+            Pair(Coordinate(2, 8), createPawn(Team.BLACK)),
+            Pair(Coordinate(8, 5), createKing(Team.BLACK))
+        )
     )
 }
 
