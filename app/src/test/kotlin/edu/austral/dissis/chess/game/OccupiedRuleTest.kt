@@ -1,11 +1,11 @@
 package edu.austral.dissis.chess.game
 
-import edu.austral.dissis.chess.board.Coordinate
+import edu.austral.dissis.common.board.Coordinate
 import edu.austral.dissis.chess.factory.rookInCenterBlockedByTeam
 import org.junit.jupiter.api.Test
-import edu.austral.dissis.chess.result.move.UnsuccessfulResult
-import edu.austral.dissis.chess.rule.game.IsOccupiedByTeamValidator
+import edu.austral.dissis.common.result.move.UnsuccessfulResult
 import edu.austral.dissis.chess.util.game.TestGameGenerator
+import edu.austral.dissis.common.rule.game.IsOccupiedByTeamValidator
 import kotlin.test.assertTrue
 
 class OccupiedRuleTest {

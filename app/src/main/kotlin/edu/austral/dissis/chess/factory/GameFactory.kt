@@ -1,13 +1,15 @@
 package edu.austral.dissis.chess.factory
 
-import edu.austral.dissis.chess.board.Board
-import edu.austral.dissis.chess.executor.NormalExecutor
-import edu.austral.dissis.chess.game.Game
+import edu.austral.dissis.common.executor.NormalExecutor
+import edu.austral.dissis.common.game.Game
 import edu.austral.dissis.chess.wincondition.NormalCheckMateValidator
-import edu.austral.dissis.chess.piece.Team
-import edu.austral.dissis.chess.rule.Rule
-import edu.austral.dissis.chess.rule.game.*
+import edu.austral.dissis.common.piece.Team
 import edu.austral.dissis.chess.wincondition.EatAllEnemyPiecesValidator
+import edu.austral.dissis.common.rule.Rule
+import edu.austral.dissis.chess.rule.game.IsNotCheckValidator
+import edu.austral.dissis.common.rule.game.IsOccupiedByTeamValidator
+import edu.austral.dissis.common.rule.game.IsYourTurnValidator
+import edu.austral.dissis.common.rule.game.PieceIsPresentValidator
 
 fun createNormalGame(): Game {
     return Game(
@@ -19,7 +21,7 @@ fun createNormalGame(): Game {
     )
 }
 
-fun createAlternativeGame(): Game{
+fun createAlternativeGame(): Game {
     return Game(
         board = createBoardWithSpecialPieces(),
         turn = Team.WHITE,

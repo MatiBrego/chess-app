@@ -3,9 +3,8 @@
  */
 package edu.austral.dissis.chess
 
-import edu.austral.dissis.chess.adapter.Adapter
+import edu.austral.dissis.common.adapter.Adapter
 import edu.austral.dissis.chess.factory.createAlternativeGame
-import edu.austral.dissis.chess.factory.createNormalGame
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
 import edu.austral.dissis.chess.gui.GameView

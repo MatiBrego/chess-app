@@ -1,9 +1,11 @@
 package edu.austral.dissis.chess.rule.game
 
-import edu.austral.dissis.chess.board.Board
-import edu.austral.dissis.chess.game.Move
-import edu.austral.dissis.chess.result.rule.*
-import edu.austral.dissis.chess.rule.Rule
+import edu.austral.dissis.common.board.Board
+import edu.austral.dissis.common.game.Move
+import edu.austral.dissis.common.result.rule.InvalidResult
+import edu.austral.dissis.common.result.rule.RuleResult
+import edu.austral.dissis.common.result.rule.ValidResult
+import edu.austral.dissis.common.rule.Rule
 
 class IsNotCheckValidator: Rule {
     private val message = "That move leaves you in check"

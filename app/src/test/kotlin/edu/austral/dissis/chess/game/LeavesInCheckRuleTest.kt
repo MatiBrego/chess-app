@@ -1,8 +1,8 @@
 package edu.austral.dissis.chess.game
 
-import edu.austral.dissis.chess.board.Coordinate
+import edu.austral.dissis.common.board.Coordinate
 import edu.austral.dissis.chess.factory.kingInCenterWithRookAndEnemyRook
-import edu.austral.dissis.chess.result.move.UnsuccessfulResult
+import edu.austral.dissis.common.result.move.UnsuccessfulResult
 import edu.austral.dissis.chess.rule.game.IsNotCheckValidator
 import edu.austral.dissis.chess.util.game.TestGameGenerator
 import kotlin.test.Test

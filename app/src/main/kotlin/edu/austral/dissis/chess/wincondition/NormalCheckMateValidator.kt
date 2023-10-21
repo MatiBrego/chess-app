@@ -1,12 +1,13 @@
 package edu.austral.dissis.chess.wincondition
 
-import edu.austral.dissis.chess.board.Board
-import edu.austral.dissis.chess.board.Coordinate
-import edu.austral.dissis.chess.game.Move
-import edu.austral.dissis.chess.piece.Team
-import edu.austral.dissis.chess.result.rule.ValidResult
-import edu.austral.dissis.chess.rule.Rule
+import edu.austral.dissis.common.board.Board
+import edu.austral.dissis.common.board.Coordinate
+import edu.austral.dissis.common.game.Move
+import edu.austral.dissis.common.piece.Team
+import edu.austral.dissis.common.result.rule.ValidResult
+import edu.austral.dissis.common.rule.Rule
 import edu.austral.dissis.chess.rule.game.CheckValidator
+import edu.austral.dissis.common.wincondition.WinningConditionValidator
 
 class NormalCheckMateValidator(
 ): WinningConditionValidator {

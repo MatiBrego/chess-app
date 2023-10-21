@@ -1,42 +1,42 @@
 package edu.austral.dissis.chess.factory
 
-import edu.austral.dissis.chess.piece.Piece
-import edu.austral.dissis.chess.piece.Team
-import edu.austral.dissis.chess.piece.PieceType
-import edu.austral.dissis.chess.result.action.ApplyMove
-import edu.austral.dissis.chess.result.action.ConvertPiece
-import edu.austral.dissis.chess.result.action.RelativePosition
-import edu.austral.dissis.chess.rule.action.PerformActionRule
-import edu.austral.dissis.chess.rule.direction.VerticalForwardValidator
-import edu.austral.dissis.chess.rule.movequantity.LimitedMovementValidator
-import edu.austral.dissis.chess.rule.obstacle.DiagonalObstacleValidator
-import edu.austral.dissis.chess.rule.obstacle.HorizontalObstacleValidator
-import edu.austral.dissis.chess.rule.obstacle.VerticalObstacleValidator
-import edu.austral.dissis.chess.rule.orientation.DiagonalValidator
-import edu.austral.dissis.chess.rule.orientation.HorizontalValidator
+import edu.austral.dissis.chess.piece.ChessPieceType
+import edu.austral.dissis.common.piece.Piece
+import edu.austral.dissis.common.piece.Team
+import edu.austral.dissis.common.result.action.ApplyMove
+import edu.austral.dissis.common.result.action.ConvertPiece
+import edu.austral.dissis.common.result.action.RelativePosition
+import edu.austral.dissis.common.rule.action.PerformActionRule
+import edu.austral.dissis.common.rule.compound.And
+import edu.austral.dissis.common.rule.compound.Or
+import edu.austral.dissis.common.rule.direction.LeftValidator
+import edu.austral.dissis.common.rule.direction.RightValidator
+import edu.austral.dissis.common.rule.direction.VerticalForwardValidator
+import edu.austral.dissis.common.rule.movequantity.ExactMovementValidator
+import edu.austral.dissis.common.rule.movequantity.LimitedMovementValidator
+import edu.austral.dissis.common.rule.obstacle.DiagonalObstacleValidator
+import edu.austral.dissis.common.rule.obstacle.HorizontalObstacleValidator
+import edu.austral.dissis.common.rule.obstacle.VerticalObstacleValidator
+import edu.austral.dissis.common.rule.orientation.DiagonalValidator
+import edu.austral.dissis.common.rule.orientation.HorizontalValidator
 import edu.austral.dissis.chess.rule.orientation.LValidator
-import edu.austral.dissis.chess.rule.orientation.VerticalValidator
-import edu.austral.dissis.chess.rule.special.HasEnemyValidator
-import edu.austral.dissis.chess.rule.special.IsFirstMoveValidator
-import edu.austral.dissis.chess.rule.compound.AndRule
-import edu.austral.dissis.chess.rule.compound.OrRule
-import edu.austral.dissis.chess.rule.direction.LeftValidator
-import edu.austral.dissis.chess.rule.direction.RightValidator
-import edu.austral.dissis.chess.rule.movequantity.ExactMovementValidator
-import edu.austral.dissis.chess.rule.special.IsOpposingRowValidator
+import edu.austral.dissis.common.rule.orientation.VerticalValidator
+import edu.austral.dissis.common.rule.special.HasEnemyValidator
+import edu.austral.dissis.common.rule.special.IsFirstMoveValidator
+import edu.austral.dissis.common.rule.special.IsOpposingRowValidator
 
 fun createRook(team: Team): Piece {
     return Piece(
-        PieceType.ROOK,
-        OrRule(
+        ChessPieceType.ROOK,
+        Or(
             listOf(
-                AndRule(
+                And(
                     listOf(
                         HorizontalValidator(),
                         HorizontalObstacleValidator()
                     )
                 ),
-                AndRule(
+                And(
                     listOf(
                         VerticalValidator(),
                         VerticalObstacleValidator()
@@ -50,8 +50,8 @@ fun createRook(team: Team): Piece {
 
 fun createBishop(team: Team): Piece {
     return Piece(
-        PieceType.BISHOP,
-        AndRule(
+        ChessPieceType.BISHOP,
+        And(
             listOf(
                 DiagonalValidator(),
                 DiagonalObstacleValidator()
@@ -63,22 +63,22 @@ fun createBishop(team: Team): Piece {
 
 fun createQueen(team: Team): Piece {
     return Piece(
-        PieceType.QUEEN,
-        OrRule(
+        ChessPieceType.QUEEN,
+        Or(
             listOf(
-                AndRule(
+                And(
                     listOf(
                         HorizontalValidator(),
                         HorizontalObstacleValidator()
                     )
                 ),
-                AndRule(
+                And(
                     listOf(
                         VerticalValidator(),
                         VerticalObstacleValidator()
                     )
                 ),
-                AndRule(
+                And(
                     listOf(
                         DiagonalValidator(),
                         DiagonalObstacleValidator()
@@ -92,12 +92,12 @@ fun createQueen(team: Team): Piece {
 
 fun createKing(team: Team): Piece {
     return Piece(
-        PieceType.KING,
-        OrRule(
+        ChessPieceType.KING,
+        Or(
             listOf(
-                AndRule(
+                And(
                     listOf(
-                        OrRule(
+                        Or(
                             listOf(
                                 HorizontalValidator(),
                                 VerticalValidator(),
@@ -107,7 +107,7 @@ fun createKing(team: Team): Piece {
                         LimitedMovementValidator(1)
                     )
                 ),
-                AndRule(
+                And(
                     listOf(
                         IsFirstMoveValidator(),
                         HorizontalValidator(),
@@ -122,7 +122,7 @@ fun createKing(team: Team): Piece {
                         )
                     )
                 ),
-                AndRule(
+                And(
                     listOf(
                         IsFirstMoveValidator(),
                         HorizontalValidator(),
@@ -145,7 +145,7 @@ fun createKing(team: Team): Piece {
 
 fun createKnight(team: Team): Piece {
     return Piece(
-        PieceType.KNIGHT,
+        ChessPieceType.KNIGHT,
         LValidator(),
         team
     )
@@ -153,10 +153,10 @@ fun createKnight(team: Team): Piece {
 
 fun createPawn(team: Team): Piece {
     return Piece(
-        PieceType.PAWN,
-        OrRule(
+        ChessPieceType.PAWN,
+        Or(
             listOf(
-                AndRule(
+                And(
                     listOf( // Crowning
                         VerticalValidator(),
                         LimitedMovementValidator(1),
@@ -171,14 +171,14 @@ fun createPawn(team: Team): Piece {
                         )
                     )
                 ),
-                AndRule( // When eating diagonally
+                And( // When eating diagonally
                     listOf(
                         HasEnemyValidator(),
                         DiagonalValidator(),
                         LimitedMovementValidator(1),
                     )
                 ),
-                AndRule( // When it is the first move
+                And( // When it is the first move
                     listOf(
                         IsFirstMoveValidator(),
                         VerticalValidator(),
@@ -187,7 +187,7 @@ fun createPawn(team: Team): Piece {
                         VerticalForwardValidator()
                     )
                 ),
-                AndRule( // When it is not the first move
+                And( // When it is not the first move
                     listOf(
                         VerticalValidator(),
                         LimitedMovementValidator(1),
@@ -201,36 +201,36 @@ fun createPawn(team: Team): Piece {
     )
 }
 
-fun createArchbishop(team: Team): Piece{
+fun createArchbishop(team: Team): Piece {
     return Piece(
-            PieceType.ARCHBISHOP,
-            OrRule(
-                listOf(
-                    AndRule(
-                        listOf(
-                            DiagonalValidator(),
-                            DiagonalObstacleValidator()
-                        )
-                    ),
-                    LValidator()
-                )
-            ),
+            ChessPieceType.ARCHBISHOP,
+        Or(
+            listOf(
+                And(
+                    listOf(
+                        DiagonalValidator(),
+                        DiagonalObstacleValidator()
+                    )
+                ),
+                LValidator()
+            )
+        ),
             team
     )
 }
 
 fun createChancellor(team: Team): Piece {
     return Piece(
-        PieceType.CHANCELLOR,
-        OrRule(
+        ChessPieceType.CHANCELLOR,
+        Or(
             listOf(
-                AndRule(
+                And(
                     listOf(
                         HorizontalValidator(),
                         HorizontalObstacleValidator()
                     )
                 ),
-                AndRule(
+                And(
                     listOf(
                         VerticalValidator(),
                         VerticalObstacleValidator()

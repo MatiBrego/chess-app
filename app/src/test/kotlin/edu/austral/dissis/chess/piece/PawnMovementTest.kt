@@ -1,12 +1,12 @@
 package edu.austral.dissis.chess.piece
 
-import edu.austral.dissis.chess.board.Coordinate
+import edu.austral.dissis.common.board.Coordinate
 import edu.austral.dissis.chess.factory.pawnInCenter
 import edu.austral.dissis.chess.factory.pawnInCenterBlocked
-import edu.austral.dissis.chess.game.Game
-import edu.austral.dissis.chess.result.move.MoveResult
-import edu.austral.dissis.chess.result.move.UnsuccessfulResult
-import edu.austral.dissis.chess.result.move.SuccessfulResult
+import edu.austral.dissis.common.game.Game
+import edu.austral.dissis.common.result.move.MoveResult
+import edu.austral.dissis.common.result.move.UnsuccessfulResult
+import edu.austral.dissis.common.result.move.SuccessfulResult
 import edu.austral.dissis.chess.util.game.TestGameGenerator
 import kotlin.test.Test
 import kotlin.test.assertTrue

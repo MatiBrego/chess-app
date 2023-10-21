@@ -1,11 +1,11 @@
 package edu.austral.dissis.chess.util.game
 
-import edu.austral.dissis.chess.board.Board
-import edu.austral.dissis.chess.game.Game
-import edu.austral.dissis.chess.wincondition.FakeValidator
-import edu.austral.dissis.chess.piece.Team
-import edu.austral.dissis.chess.rule.Rule
-import edu.austral.dissis.chess.rule.game.PieceIsPresentValidator
+import edu.austral.dissis.chess.util.game.checkmate.FakeValidator
+import edu.austral.dissis.common.board.Board
+import edu.austral.dissis.common.game.Game
+import edu.austral.dissis.common.piece.Team
+import edu.austral.dissis.common.rule.Rule
+import edu.austral.dissis.common.rule.game.PieceIsPresentValidator
 
 class TestGameGenerator {
     fun generate(

@@ -1,9 +1,9 @@
 package edu.austral.dissis.chess.factory
 
-import edu.austral.dissis.chess.board.Board
-import edu.austral.dissis.chess.board.Coordinate
-import edu.austral.dissis.chess.piece.Piece
-import edu.austral.dissis.chess.piece.Team
+import edu.austral.dissis.common.board.Board
+import edu.austral.dissis.common.board.Coordinate
+import edu.austral.dissis.common.piece.Piece
+import edu.austral.dissis.common.piece.Team
 
 fun ceroIndexedNormalBoard(): Board {
     val map: MutableMap<Coordinate, Piece> = mutableMapOf()
