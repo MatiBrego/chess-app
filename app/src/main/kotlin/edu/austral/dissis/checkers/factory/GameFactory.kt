@@ -4,7 +4,7 @@ import edu.austral.dissis.common.executor.NormalExecutor
 import edu.austral.dissis.common.game.Game
 import edu.austral.dissis.common.piece.Team
 import edu.austral.dissis.common.rule.Rule
-import edu.austral.dissis.common.rule.game.IsOccupiedByTeamValidator
+import edu.austral.dissis.common.rule.game.IsNotOccupiedValidator
 import edu.austral.dissis.common.rule.game.IsYourTurnValidator
 import edu.austral.dissis.common.rule.game.PieceIsPresentValidator
 import edu.austral.dissis.common.wincondition.EatAllEnemyPiecesValidator
@@ -23,6 +23,6 @@ fun createNormalRules(): List<Rule>{
     return listOf(
         PieceIsPresentValidator(),
         IsYourTurnValidator(),
-        IsOccupiedByTeamValidator(),
+        IsNotOccupiedValidator(),
     )
 }

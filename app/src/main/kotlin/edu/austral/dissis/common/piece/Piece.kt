@@ -7,7 +7,7 @@ import edu.austral.dissis.common.rule.Rule
 
 data class Piece (
     val pieceType: PieceType,
-    val pieceRule: edu.austral.dissis.common.rule.Rule,
+    val pieceRule: Rule,
     val team: Team,
     private val id: String = "",
     private val moveCount: Int = 0){
