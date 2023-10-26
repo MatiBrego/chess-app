@@ -15,7 +15,8 @@ import kotlin.math.abs
 class CheckersCaptureValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         val captures = isValidCaptureMove(move.getFrom(), move.getTo(), board, move.getTurn())
-        return if(captures.isNotEmpty()) {
+
+        return if(captures.isNotEmpty() && !hasCapturesAvailable(move.getTo(), board, move.getTurn())) {
             getValidWithExecutionResult(captures, move.getFrom())
         } else {
             InvalidResult()
@@ -91,5 +92,24 @@ class CheckersCaptureValidator: Rule {
 
     private fun getRelativePosition(from: Coordinate, to: Coordinate): RelativePosition {
         return RelativePosition(abs(to.row - from.row), to.column - from.column)
+    }
+
+    private fun hasCapturesAvailable(to: Coordinate, board: Board, team: Team): Boolean {
+        val potentialCaptures =  getPotentialCaptures(to, board, team)
+        var atLeastOneForward = false
+        if(team == Team.WHITE){
+            for (potentialCapture in potentialCaptures) {
+                if (potentialCapture.first.row > to.row) {
+                    atLeastOneForward = true
+                }
+            }
+        }else{
+            for (potentialCapture in potentialCaptures) {
+                if (potentialCapture.first.row < to.row) {
+                    atLeastOneForward = true
+                }
+            }
+        }
+        return potentialCaptures.isNotEmpty() && atLeastOneForward
     }
 }

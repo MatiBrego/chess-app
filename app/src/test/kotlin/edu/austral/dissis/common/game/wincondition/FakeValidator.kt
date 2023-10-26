@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.util.game.checkmate
+package edu.austral.dissis.common.game.wincondition
 
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.wincondition.WinningConditionValidator

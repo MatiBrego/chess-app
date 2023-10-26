@@ -3,7 +3,7 @@ package edu.austral.dissis.chess.piece
 import edu.austral.dissis.common.board.Coordinate
 import edu.austral.dissis.chess.factory.queenInCenter
 import org.junit.jupiter.api.Test
-import edu.austral.dissis.chess.util.game.TestGameGenerator
+import edu.austral.dissis.common.game.TestGameGenerator
 
 class QueenMovementTest {
     private val generator = TestGameGenerator()

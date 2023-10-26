@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import edu.austral.dissis.common.result.move.UnsuccessfulResult
 import edu.austral.dissis.common.result.move.SuccessfulResult
-import edu.austral.dissis.chess.util.game.TestGameGenerator
+import edu.austral.dissis.common.game.TestGameGenerator
 
 class KnightMovementTest {
 

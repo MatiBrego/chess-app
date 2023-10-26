@@ -5,7 +5,7 @@ import edu.austral.dissis.chess.factory.rookInCenter
 import edu.austral.dissis.chess.factory.rookInCenterBlocked
 import edu.austral.dissis.common.result.move.UnsuccessfulResult
 import edu.austral.dissis.common.result.move.SuccessfulResult
-import edu.austral.dissis.chess.util.game.TestGameGenerator
+import edu.austral.dissis.common.game.TestGameGenerator
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
