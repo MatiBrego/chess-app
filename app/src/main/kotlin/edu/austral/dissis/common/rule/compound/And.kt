@@ -37,7 +37,9 @@ class And(
             is ValidWithExecutionResult -> {
                 when(newResult){
                     ValidResult -> previousResult
-                    is ValidWithExecutionResult -> previousResult
+                    is ValidWithExecutionResult -> ValidWithExecutionResult(
+                        previousResult.getActions() + newResult.getActions()
+                    )
                     is InvalidResult -> throw IllegalStateException("New result should not be invalid in AND rule")
                 }
             }

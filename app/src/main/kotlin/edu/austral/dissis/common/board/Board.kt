@@ -43,4 +43,8 @@ class Board(
     fun getRowQuantity(): Int {
         return boardSize.getRows()
     }
+
+    fun isInBounds(coordinate: Coordinate): Boolean {
+        return coordinate.row in 1 until getRowQuantity() && coordinate.column in 1 until getColumnQuantity()
+    }
 }

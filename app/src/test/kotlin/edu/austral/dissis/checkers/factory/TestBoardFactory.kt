@@ -1,6 +1,5 @@
 package edu.austral.dissis.checkers.factory
 
-import edu.austral.dissis.chess.factory.createBishop
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.Coordinate
 import edu.austral.dissis.common.piece.Team

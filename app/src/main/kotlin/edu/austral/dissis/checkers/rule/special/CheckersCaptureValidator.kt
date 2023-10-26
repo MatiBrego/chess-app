@@ -70,6 +70,8 @@ class CheckersCaptureValidator: Rule {
             val potentialEndY = coordinate.column + direction.second
             val potentialEndCoordinate = Coordinate(potentialEndX, potentialEndY)
 
+            if(!board.isInBounds(potentialEndCoordinate)) continue
+
             val potentialMidX = coordinate.row + direction.first / 2
             val potentialMidY = coordinate.column + direction.second / 2
             val potentialMidCoordinate = Coordinate(potentialMidX, potentialMidY)
