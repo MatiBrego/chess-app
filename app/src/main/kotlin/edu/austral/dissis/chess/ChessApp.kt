@@ -3,8 +3,10 @@
  */
 package edu.austral.dissis.chess
 
+import edu.austral.dissis.chess.factory.createAlternativeDimensionsBoard
 import edu.austral.dissis.common.adapter.Adapter
 import edu.austral.dissis.chess.factory.createAlternativeGame
+import edu.austral.dissis.chess.factory.createGameWithSpecialSizedBoard
 import edu.austral.dissis.chess.factory.createNormalChessGame
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
@@ -20,7 +22,7 @@ fun main() {
 }
 
 class ChessGameApplication : Application() {
-    private val gameEngine = Adapter(createNormalChessGame())
+    private val gameEngine = Adapter(createGameWithSpecialSizedBoard())
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {

@@ -11,4 +11,8 @@ class BoardSize(
     fun getRows(): Int {
         return rows
     }
+
+    override fun toString(): String {
+        return "BoardSize(columns=$columns, rows=$rows)"
+    }
 }

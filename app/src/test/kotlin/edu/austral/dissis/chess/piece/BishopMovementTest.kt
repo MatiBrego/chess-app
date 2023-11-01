@@ -23,7 +23,6 @@ class BishopMovementTest {
         // Up and left
         assertTrue(game.move(bishopPosition, Coordinate(2,2)) is SuccessfulResult)
         assertTrue(game.move(bishopPosition, Coordinate(1,1)) is SuccessfulResult)
-        assertTrue(game.move(bishopPosition, Coordinate(0,0)) is SuccessfulResult)
 
         // Down and right
         assertTrue(game.move(bishopPosition, Coordinate(4,4)) is SuccessfulResult)
@@ -36,13 +35,10 @@ class BishopMovementTest {
         // Up and right
         assertTrue(game.move(bishopPosition, Coordinate(4,2)) is SuccessfulResult)
         assertTrue(game.move(bishopPosition, Coordinate(5,1)) is SuccessfulResult)
-        assertTrue(game.move(bishopPosition, Coordinate(6,0)) is SuccessfulResult)
 
         // Down and left
         assertTrue(game.move(bishopPosition, Coordinate(2,4)) is SuccessfulResult)
         assertTrue(game.move(bishopPosition, Coordinate(1,5)) is SuccessfulResult)
-        assertTrue(game.move(bishopPosition, Coordinate(0,6)) is SuccessfulResult)
-
 
     }
 
@@ -57,17 +53,17 @@ class BishopMovementTest {
         }
 
         // Invalid moves for row 1
-        for (col in listOf(0, 2, 3, 4, 6, 7)) {
+        for (col in listOf(2, 3, 4, 6, 7)) {
             assertTrue(game.move(bishopPosition, Coordinate(1, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 2
-        for (col in listOf(0, 1, 3, 6, 7)) {
+        for (col in listOf(1, 3, 6, 7)) {
             assertTrue(game.move(bishopPosition, Coordinate(2, col)) is UnsuccessfulResult)
         }
 
         // Invalid moves for row 3 (bishop's own row)
-        for (col in listOf(0, 1, 2, 4, 5, 6, 7)) {
+        for (col in listOf(1, 2, 4, 5, 6, 7)) {
             assertTrue(game.move(bishopPosition, Coordinate(3, col)) is UnsuccessfulResult)
         }
 
@@ -77,7 +73,7 @@ class BishopMovementTest {
         }
 
         // Invalid moves for rows 5
-        for (col in listOf(0, 2, 3, 4, 6, 7)) {
+        for (col in listOf(2, 3, 4, 6, 7)) {
             assertTrue(game.move(bishopPosition, Coordinate(5, col)) is UnsuccessfulResult)
         }
 
@@ -87,7 +83,7 @@ class BishopMovementTest {
         }
 
         // Invalid moves for row 7
-        for (col in listOf(0, 1, 2, 3, 4, 5, 6)) {
+        for (col in listOf(1, 2, 3, 4, 5, 6)) {
             assertTrue(game.move(bishopPosition, Coordinate(7, col)) is UnsuccessfulResult)
         }
 
@@ -103,7 +99,6 @@ class BishopMovementTest {
 
         // Up and left
         assertTrue(game.move(bishopPosition, Coordinate(1,1)) is UnsuccessfulResult)
-        assertTrue(game.move(bishopPosition, Coordinate(0,0)) is UnsuccessfulResult)
 
         // Down and right
         assertTrue(game.move(bishopPosition, Coordinate(5,5)) is UnsuccessfulResult)
@@ -114,10 +109,8 @@ class BishopMovementTest {
 
         // Up and right
         assertTrue(game.move(bishopPosition, Coordinate(5,1)) is UnsuccessfulResult)
-        assertTrue(game.move(bishopPosition, Coordinate(6,0)) is UnsuccessfulResult)
 
         // Down and left
         assertTrue(game.move(bishopPosition, Coordinate(1,5)) is UnsuccessfulResult)
-        assertTrue(game.move(bishopPosition, Coordinate(0,6)) is UnsuccessfulResult)
     }
 }

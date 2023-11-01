@@ -1,6 +1,7 @@
 package edu.austral.dissis.chess.factory
 
 import edu.austral.dissis.common.board.Board
+import edu.austral.dissis.common.board.BoardSize
 import edu.austral.dissis.common.board.Coordinate
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.Team
@@ -103,4 +104,16 @@ fun createBoardWithSpecialPieces(): Board {
     map[Coordinate(8, 5)] = createKing(Team.BLACK)
 
     return Board(map)
+}
+
+fun createAlternativeDimensionsBoard(): Board{
+    val map: MutableMap<Coordinate, Piece> = mutableMapOf()
+
+    // Queen
+    map[Coordinate(1, 1)] = createQueen(Team.WHITE)
+    map[Coordinate(1, 3)] = createQueen(Team.WHITE)
+    map[Coordinate(4, 1)] = createQueen(Team.BLACK)
+    map[Coordinate(4, 3)] = createQueen(Team.BLACK)
+
+    return Board(map, BoardSize(3, 4))
 }

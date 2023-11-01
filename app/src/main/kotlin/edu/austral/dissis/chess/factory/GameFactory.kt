@@ -31,6 +31,16 @@ fun createAlternativeGame(): Game {
     )
 }
 
+fun createGameWithSpecialSizedBoard(): Game{
+    return Game(
+        board = createAlternativeDimensionsBoard(),
+        turn = Team.WHITE,
+        rules = createAlternativeRules(),
+        winningConditionValidator = EatAllEnemyPiecesValidator(),
+        moveExecutor = NormalExecutor()
+    )
+}
+
 private fun createNormalRules(): List<Rule> {
     return listOf(
         PieceIsPresentValidator(),
