@@ -1,3 +1,11 @@
 package edu.austral.dissis.common.result.rule
 
-object ValidResult: RuleResult
+import edu.austral.dissis.common.result.action.Action
+
+class ValidResult(
+    private val actions: List<Action> = emptyList()
+): RuleResult {
+    fun getActions(): List<Action> {
+        return actions
+    }
+}

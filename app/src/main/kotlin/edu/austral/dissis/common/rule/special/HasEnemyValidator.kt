@@ -10,7 +10,7 @@ import edu.austral.dissis.common.rule.Rule
 class HasEnemyValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         board.getPiece(move.getTo())?.let {
-            if (it.team != move.getTurn()) return ValidResult
+            if (it.team != move.getTurn()) return ValidResult()
             else return InvalidResult()
         }
         return InvalidResult()

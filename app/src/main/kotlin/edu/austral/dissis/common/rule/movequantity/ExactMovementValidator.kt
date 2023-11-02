@@ -15,7 +15,7 @@ class ExactMovementValidator(
         val verticalDistance = kotlin.math.abs(move.getFrom().row - move.getTo().row)
 
         return if (horizontalDistance == quantity || verticalDistance == quantity) {
-            ValidResult
+            ValidResult()
         } else {
             InvalidResult()
         }

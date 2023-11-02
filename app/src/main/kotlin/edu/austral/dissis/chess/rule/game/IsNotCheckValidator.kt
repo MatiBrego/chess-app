@@ -14,6 +14,6 @@ class IsNotCheckValidator: Rule {
         val boardAfterMove = board.movePiece(move.getFrom(), move.getTo())
 
         if (checkValidator.isCheck(boardAfterMove, move.getTurn())) return InvalidResult(message)
-        return ValidResult
+        return ValidResult()
     }
 }

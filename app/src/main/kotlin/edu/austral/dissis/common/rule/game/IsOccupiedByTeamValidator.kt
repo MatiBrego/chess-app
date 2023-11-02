@@ -14,7 +14,8 @@ class IsOccupiedByTeamValidator: Rule {
 
         board.getPiece(move.getTo())?.let {
             if(it.team == fromPiece.team) return InvalidResult(message)
-            else return ValidResult
+            else return ValidResult()
         }
-        return ValidResult    }
+        return ValidResult()
+    }
 }

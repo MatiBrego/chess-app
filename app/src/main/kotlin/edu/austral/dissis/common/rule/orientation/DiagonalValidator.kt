@@ -12,7 +12,7 @@ class DiagonalValidator: Rule {
 
     override fun validateMove(move: Move, board: Board): RuleResult {
         return if (abs(move.getFrom().row - move.getTo().row) == abs(move.getFrom().column - move.getTo().column)) {
-            ValidResult
+            ValidResult()
         }else{
             InvalidResult()
         }

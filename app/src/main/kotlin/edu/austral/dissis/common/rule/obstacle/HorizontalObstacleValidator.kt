@@ -13,7 +13,7 @@ class HorizontalObstacleValidator(
     override fun validateMove(move: Move, board: Board): RuleResult {
         // Check if move is not horizontal
         if(move.getFrom().row != move.getTo().row){
-            return ValidResult
+            return ValidResult()
         }
 
         var currentCoordinate =
@@ -36,6 +36,6 @@ class HorizontalObstacleValidator(
                 }
         }
 
-        return ValidResult
+        return ValidResult()
     }
 }

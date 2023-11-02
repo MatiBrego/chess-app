@@ -10,6 +10,6 @@ import edu.austral.dissis.common.rule.Rule
 class PieceIsPresentValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         return if (board.getPiece(move.getFrom()) == null) InvalidResult("No piece in that coordinate")
-        else ValidResult
+        else ValidResult()
     }
 }

@@ -10,7 +10,7 @@ import edu.austral.dissis.common.result.rule.ValidResult
 class IsNotOccupiedValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         return if (board.getPiece(move.getTo()) == null) {
-            ValidResult
+            ValidResult()
         } else {
             InvalidResult("The position is occupied")
         }

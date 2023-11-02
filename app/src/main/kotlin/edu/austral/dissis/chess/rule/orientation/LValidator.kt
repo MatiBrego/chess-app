@@ -19,7 +19,7 @@ class LValidator: Rule {
             (move.getFrom().row == move.getTo().row - 1 && move.getFrom().column == move.getTo().column - 2) ||
             (move.getFrom().row == move.getTo().row - 2 && move.getFrom().column == move.getTo().column - 1)
         ) {
-            ValidResult
+            ValidResult()
         }else{
             InvalidResult()
         }

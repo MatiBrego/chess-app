@@ -9,7 +9,7 @@ import edu.austral.dissis.common.rule.Rule
 
 class VerticalValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
-        return if (move.getFrom().column == move.getTo().column) ValidResult
+        return if (move.getFrom().column == move.getTo().column) ValidResult()
         else InvalidResult()
     }
 }

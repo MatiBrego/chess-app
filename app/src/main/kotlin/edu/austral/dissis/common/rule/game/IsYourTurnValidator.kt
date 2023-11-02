@@ -12,7 +12,7 @@ class IsYourTurnValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         val fromPiece = board.getPiece(move.getFrom()) ?: return InvalidResult("No piece in that coordinate")
 
-        return if(fromPiece.team == move.getTurn()) ValidResult
+        return if(fromPiece.team == move.getTurn()) ValidResult()
         else InvalidResult(message)
     }
 }

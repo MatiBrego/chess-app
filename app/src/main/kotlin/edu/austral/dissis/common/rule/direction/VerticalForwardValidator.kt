@@ -21,7 +21,7 @@ class VerticalForwardValidator: Rule {
 
     private fun validateWhiteDirection(from: Coordinate, to: Coordinate): RuleResult {
         return if (from.row < to.row){
-            ValidResult
+            ValidResult()
         }else{
             InvalidResult()
         }
@@ -29,7 +29,7 @@ class VerticalForwardValidator: Rule {
 
     private fun validateBlackDirection(from: Coordinate, to: Coordinate): RuleResult {
         return if (from.row > to.row){
-            ValidResult
+            ValidResult()
         }else {
             InvalidResult()
         }

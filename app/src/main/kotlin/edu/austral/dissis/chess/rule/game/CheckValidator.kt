@@ -7,7 +7,6 @@ import edu.austral.dissis.common.game.Move
 import edu.austral.dissis.common.piece.Team
 import edu.austral.dissis.common.result.rule.InvalidResult
 import edu.austral.dissis.common.result.rule.ValidResult
-import edu.austral.dissis.common.result.rule.ValidWithExecutionResult
 
 class CheckValidator {
     fun isCheck(board: Board, kingsTeam: Team): Boolean {
@@ -36,7 +35,6 @@ class CheckValidator {
                 )
             ) {
                 is ValidResult -> return true
-                is ValidWithExecutionResult -> return true
                 is InvalidResult -> {} //Continue
             }
         }

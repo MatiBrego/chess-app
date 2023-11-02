@@ -12,12 +12,12 @@ class IsOpposingRowValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         return if(move.getTurn() == Team.WHITE){
             if(move.getTo().row == board.getRowQuantity()){
-                ValidResult
+                ValidResult()
             }else
                 InvalidResult()
         }else
             if(move.getTo().row == 1){
-                ValidResult
+                ValidResult()
             }else
                 InvalidResult()
     }

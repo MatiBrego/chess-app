@@ -11,7 +11,7 @@ import edu.austral.dissis.common.rule.Rule
 class OutOfBoundsValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         return if (board.isInBounds(move.getTo())) {
-            ValidResult
+            ValidResult()
         } else {
             InvalidResult()
         }

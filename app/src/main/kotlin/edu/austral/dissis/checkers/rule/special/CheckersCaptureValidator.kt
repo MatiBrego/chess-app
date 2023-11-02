@@ -8,7 +8,7 @@ import edu.austral.dissis.common.result.action.RelativePosition
 import edu.austral.dissis.common.result.action.RemovePiece
 import edu.austral.dissis.common.result.rule.InvalidResult
 import edu.austral.dissis.common.result.rule.RuleResult
-import edu.austral.dissis.common.result.rule.ValidWithExecutionResult
+import edu.austral.dissis.common.result.rule.ValidResult
 import edu.austral.dissis.common.rule.Rule
 import kotlin.math.abs
 
@@ -17,7 +17,7 @@ class CheckersCaptureValidator: Rule {
         val captures = isValidCaptureMove(move.getFrom(), move.getTo(), board, move.getTurn())
 
         return if(captures.isNotEmpty() && !hasCapturesAvailable(move.getTo(), board, move.getTurn())) {
-            getValidWithExecutionResult(captures, move.getFrom())
+            getValidResultWithActions(captures, move.getFrom())
         } else {
             InvalidResult()
         }
@@ -84,12 +84,12 @@ class CheckersCaptureValidator: Rule {
         return potentialCaptures
     }
 
-    private fun getValidWithExecutionResult(captures: List<Coordinate>, from: Coordinate): ValidWithExecutionResult {
+    private fun getValidResultWithActions(captures: List<Coordinate>, from: Coordinate): RuleResult {
         val actions = mutableListOf<RemovePiece>()
         for (capture in captures) {
             actions.add(RemovePiece(getRelativePosition(from, capture)))
         }
-        return ValidWithExecutionResult(actions)
+        return ValidResult(actions)
     }
 
     private fun getRelativePosition(from: Coordinate, to: Coordinate): RelativePosition {

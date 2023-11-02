@@ -15,7 +15,7 @@ class VerticalObstacleValidator(
     override fun validateMove(move: Move, board: Board): RuleResult {
         // Check if move is not vertical
         if(move.getFrom().column != move.getTo().column){
-            return ValidResult
+            return ValidResult()
         }
 
         var currentCoordinate = if (move.getFrom().row < move.getTo().row){
@@ -38,7 +38,7 @@ class VerticalObstacleValidator(
 
         // If is inclusive is set to true, check if the "to" coordinate is occupied
         return if (!(isInclusive && board.getPiece(move.getTo()) != null))
-            ValidResult
+            ValidResult()
         else
             InvalidResult()
     }

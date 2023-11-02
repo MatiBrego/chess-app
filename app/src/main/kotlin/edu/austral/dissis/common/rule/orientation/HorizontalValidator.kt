@@ -9,7 +9,7 @@ import edu.austral.dissis.common.rule.Rule
 
 class HorizontalValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
-        return if (move.getFrom().row == move.getTo().row) ValidResult
+        return if (move.getFrom().row == move.getTo().row) ValidResult()
         else InvalidResult()
     }
 }

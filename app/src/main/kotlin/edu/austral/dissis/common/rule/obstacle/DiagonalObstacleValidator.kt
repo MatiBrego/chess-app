@@ -13,7 +13,7 @@ class DiagonalObstacleValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         // Check if move is not diagonal
         if(abs(move.getFrom().row - move.getTo().row) != abs(move.getFrom().column - move.getTo().column)){
-            return ValidResult
+            return ValidResult()
         }
 
         var currentCoordinate = move.getFrom()
@@ -34,6 +34,6 @@ class DiagonalObstacleValidator: Rule {
             }
         }
 
-        return ValidResult
+        return ValidResult()
     }
 }

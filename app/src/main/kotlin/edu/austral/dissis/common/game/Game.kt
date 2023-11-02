@@ -9,7 +9,6 @@ import edu.austral.dissis.chess.wincondition.NormalCheckMateValidator
 import edu.austral.dissis.common.piece.Team
 import edu.austral.dissis.common.result.rule.InvalidResult
 import edu.austral.dissis.common.result.rule.ValidResult
-import edu.austral.dissis.common.result.rule.ValidWithExecutionResult
 import edu.austral.dissis.common.result.action.Action
 import edu.austral.dissis.common.result.move.EndOfGameResult
 import edu.austral.dissis.common.result.move.MoveResult
@@ -50,8 +49,7 @@ class Game(
     private fun validateGameRules(move: Move): MoveResult {
         for (rule in rules){
             return when (val result = rule.validateMove(move, board)){
-                ValidResult -> continue
-                is ValidWithExecutionResult -> continue
+                is ValidResult -> continue
                 is InvalidResult -> UnsuccessfulResult(result.getMessage())
             }
         }
@@ -62,26 +60,12 @@ class Game(
         val piece = board.getPiece(move.getFrom()) ?: throw NoSuchElementException("No piece found")
 
         return when (val result = piece.validateMove(move, board)){
-            ValidResult -> executeSingleMove(move, board)
-            is ValidWithExecutionResult -> executeActions(result.getActions(), move, board)
+            is ValidResult -> doMove(move, board, result.getActions())
             is InvalidResult -> UnsuccessfulResult(result.getMessage())
         }
     }
 
-    private fun executeSingleMove(move: Move, board: Board): SuccessfulResult {
-        val modifiedBoard: Board = moveExecutor.executeSingleMove(move, board)
-        return SuccessfulResult(
-            Game(
-                modifiedBoard,
-                getEnemyTeam(),
-                rules,
-                winningConditionValidator,
-                moveExecutor
-            )
-        )
-    }
-
-    private fun executeActions(actions: List<Action>, move: Move, board: Board): SuccessfulResult {
+    private fun doMove(move: Move, board: Board, actions: List<Action>): SuccessfulResult {
         var modifiedBoard: Board = moveExecutor.executeSingleMove(move, board)
             modifiedBoard = moveExecutor.executeActions(actions, move, modifiedBoard)
         return SuccessfulResult(

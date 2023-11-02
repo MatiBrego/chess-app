@@ -10,7 +10,7 @@ import edu.austral.dissis.common.rule.Rule
 class RightValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         return if(move.getFrom().column < move.getTo().column)
-            ValidResult
+            ValidResult()
         else
             InvalidResult()
     }

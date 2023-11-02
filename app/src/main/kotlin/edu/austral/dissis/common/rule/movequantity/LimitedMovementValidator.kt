@@ -16,7 +16,7 @@ class LimitedMovementValidator(
         val verticalDistance = kotlin.math.abs(move.getFrom().row - move.getTo().row)
 
         return if (horizontalDistance <= maxMoveQuantity && verticalDistance <= maxMoveQuantity) {
-            ValidResult
+            ValidResult()
         } else {
             InvalidResult()
         }

@@ -11,7 +11,7 @@ class IsFirstMoveValidator: Rule {
     override fun validateMove(move: Move, board: Board): RuleResult {
         val fromPiece = board.getPiece(move.getFrom()) ?: return InvalidResult("No piece in that coordinate")
 
-        if (fromPiece.getMoveCount() == 0) return ValidResult
+        if (fromPiece.getMoveCount() == 0) return ValidResult()
         return InvalidResult()
     }
 }
