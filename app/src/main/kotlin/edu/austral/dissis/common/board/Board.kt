@@ -41,6 +41,14 @@ class Board(
         return positions.keys.toList()
     }
 
+    fun getBoardSize(): BoardSize{
+        return boardSize
+    }
+
+    fun getPositions(): Map<Coordinate, Piece>{
+        return positions
+    }
+
     fun getColumnQuantity(): Int {
         return boardSize.getColumns()
     }

@@ -33,7 +33,7 @@ fun createQueen(team: Team): Piece {
             listOf(
                 moveVertically(),
                 moveHorizontally(),
-                moveHorizontally()
+                moveDiagonally()
             )
         ),
         team
