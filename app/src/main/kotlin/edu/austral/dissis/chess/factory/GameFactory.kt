@@ -1,15 +1,27 @@
 package edu.austral.dissis.chess.factory
 
+import edu.austral.dissis.chess.rule.game.IsNotCheckValidator
+import edu.austral.dissis.chess.wincondition.NormalCheckMateValidator
 import edu.austral.dissis.common.executor.NormalExecutor
 import edu.austral.dissis.common.game.Game
-import edu.austral.dissis.chess.wincondition.NormalCheckMateValidator
 import edu.austral.dissis.common.piece.Team
-import edu.austral.dissis.common.wincondition.EatAllEnemyPiecesValidator
 import edu.austral.dissis.common.rule.Rule
-import edu.austral.dissis.chess.rule.game.IsNotCheckValidator
 import edu.austral.dissis.common.rule.game.IsOccupiedByTeamValidator
 import edu.austral.dissis.common.rule.game.IsYourTurnValidator
 import edu.austral.dissis.common.rule.game.PieceIsPresentValidator
+import edu.austral.dissis.common.wincondition.EatAllEnemyPiecesValidator
+
+object NormalChessGame {
+    operator fun invoke(): Game {
+        return Game(
+            board = createNormalStartingBoard(),
+            turn = Team.WHITE,
+            rules = createNormalRules(),
+            winningConditionValidator = NormalCheckMateValidator(),
+            moveExecutor = NormalExecutor()
+        )
+    }
+}
 
 fun createNormalChessGame(): Game {
     return Game(

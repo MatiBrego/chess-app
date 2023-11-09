@@ -47,5 +47,15 @@ javafx {
 
 application {
     // Define the main class for the application.
-    mainClass.set("edu.austral.dissis.chess.AppKt")
+    mainClass.set("edu.austral.dissis.app.ClientAppKt")
+}
+
+tasks.register("runClient", JavaExec::class) {
+    classpath = project.tasks.getAt(JavaPlugin.JAR_TASK_NAME).outputs.files.plus(project.configurations.getByName(JavaPlugin.RUNTIME_CLASSPATH_CONFIGURATION_NAME))
+    mainClass.set("edu.austral.dissis.app.ClientAppKt")
+}
+
+tasks.register("runServer", JavaExec::class) {
+    classpath = project.tasks.getAt(JavaPlugin.JAR_TASK_NAME).outputs.files.plus(project.configurations.getByName(JavaPlugin.RUNTIME_CLASSPATH_CONFIGURATION_NAME))
+    mainClass.set("edu.austral.dissis.app.ServerAppKt")
 }

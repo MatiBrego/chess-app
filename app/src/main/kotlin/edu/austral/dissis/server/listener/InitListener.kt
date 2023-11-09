@@ -6,14 +6,14 @@ import edu.austral.dissis.common.game.Game
 import edu.austral.dissis.server.GameServer
 import edu.austral.dissis.server.payload.InitPayload
 import edu.austral.dissis.server.payload.PiecePayload
-import edu.austral.ingsis.clientserver.Message
-import edu.austral.ingsis.clientserver.MessageListener
+import edu.austral.ingsis.clientserver.ServerConnectionListener
 
-class InitListener(private val gameServer: GameServer): MessageListener<Unit> {
-    override fun handleMessage(message: Message<Unit>) {
+class InitListener(private val gameServer: GameServer): ServerConnectionListener{
+    override fun handleClientConnection(clientId: String) {
         val currentGameState = gameServer.getGame();
         val payload = getPayload(currentGameState)
-        gameServer.broadcastInit(payload)
+//        gameServer.broadcastInit(payload)
+        gameServer.sendInit(clientId, payload)
     }
 
     private fun getPayload(currentGameState: Game) = InitPayload(
@@ -37,5 +37,9 @@ class InitListener(private val gameServer: GameServer): MessageListener<Unit> {
                 piece.pieceType.value()
             )
         }
+    }
+
+    override fun handleClientConnectionClosed(clientId: String) {
+        TODO("Not yet implemented")
     }
 }

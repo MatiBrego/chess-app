@@ -28,8 +28,8 @@ class GameServer(
         return game
     }
 
-    fun broadcastInit(payload: InitPayload){
-        server.broadcast(Message("init", payload))
+    fun sendInit(clientId: String, payload: InitPayload){
+        server.sendMessage(clientId, Message("init", payload))
     }
 
     fun broadcastNewState(payload: NewEventPayload){
@@ -57,9 +57,7 @@ class GameServer(
     private fun buildServer(): Server{
         return builder
             .withPort(8080)
-            .addMessageListener(
-                "request-init",
-                object : TypeReference<Message<Unit>>() {},
+            .withConnectionListener(
                 InitListener(this)
             )
             .addMessageListener(
