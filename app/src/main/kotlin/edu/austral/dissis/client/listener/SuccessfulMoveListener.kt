@@ -7,14 +7,11 @@ import edu.austral.dissis.server.payload.PiecePayload
 import edu.austral.dissis.server.payload.SuccessfulMovePayload
 import edu.austral.ingsis.clientserver.Message
 import edu.austral.ingsis.clientserver.MessageListener
-import javafx.application.Platform
 
 class SuccessfulMoveListener(private val root: GameView): MessageListener<SuccessfulMovePayload> {
     override fun handleMessage(message: Message<SuccessfulMovePayload>) {
         val adaptedMoveResult = adaptNewState(message.payload.turn, message.payload.piecePayload)
-        Platform.runLater {
-            root.handleMoveResult(adaptedMoveResult)
-        }
+        root.handleMoveResult(adaptedMoveResult)
     }
 
     private fun adaptNewState(team: Team, pieces: List<PiecePayload>): NewGameState {

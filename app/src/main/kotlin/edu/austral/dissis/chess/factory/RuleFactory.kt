@@ -135,8 +135,18 @@ fun pawnCapture(): Rule{
 }
 
 fun crown(team: Team): Rule{
+    return Or(
+        listOf(
+            crownForward(team),
+            crownCaptureRight(team),
+            crownCaptureLeft(team),
+        )
+    )
+}
+
+fun crownForward(team: Team): Rule{
     return And(
-        listOf( // Crowning
+        listOf(
             VerticalValidator(),
             LimitedMovementValidator(1),
             VerticalObstacleValidator(true),
@@ -146,6 +156,34 @@ fun crown(team: Team): Rule{
     ).withActions(
         listOf(
             ConvertPiece(RelativePosition(1, 0), createQueen(team))
+        )
+    )
+}
+
+fun crownCaptureRight(team: Team): Rule{
+    return And(
+        listOf(
+            pawnCapture(),
+            RightValidator(),
+            IsOpposingRowValidator(),
+        )
+    ).withActions(
+        listOf(
+            ConvertPiece(RelativePosition(1, 1), createQueen(team))
+        )
+    )
+}
+
+fun crownCaptureLeft(team: Team): Rule{
+    return And(
+        listOf(
+            pawnCapture(),
+            LeftValidator(),
+            IsOpposingRowValidator(),
+        )
+    ).withActions(
+        listOf(
+            ConvertPiece(RelativePosition(1, -1), createQueen(team))
         )
     )
 }

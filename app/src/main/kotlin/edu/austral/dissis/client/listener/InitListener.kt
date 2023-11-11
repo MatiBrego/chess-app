@@ -7,14 +7,11 @@ import edu.austral.dissis.server.payload.InitPayload
 import edu.austral.dissis.server.payload.PiecePayload
 import edu.austral.ingsis.clientserver.Message
 import edu.austral.ingsis.clientserver.MessageListener
-import javafx.application.Platform
 
 class InitListener(private val root: GameView): MessageListener<InitPayload> {
     override fun handleMessage(message: Message<InitPayload>) {
         val initState = getInitialState(message.payload)
-        Platform.runLater {
-            root.handleInitialState(initState)
-        }
+        root.handleInitialState(initState)
     }
 
     private fun getInitialState(payload: InitPayload): InitialState {

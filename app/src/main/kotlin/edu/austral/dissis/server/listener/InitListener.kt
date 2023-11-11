@@ -12,8 +12,8 @@ class InitListener(private val gameServer: GameServer): ServerConnectionListener
     override fun handleClientConnection(clientId: String) {
         val currentGameState = gameServer.getGame();
         val payload = getPayload(currentGameState)
-//        gameServer.broadcastInit(payload)
         gameServer.sendInit(clientId, payload)
+        println("Client $clientId connected")
     }
 
     private fun getPayload(currentGameState: Game) = InitPayload(
@@ -40,6 +40,6 @@ class InitListener(private val gameServer: GameServer): ServerConnectionListener
     }
 
     override fun handleClientConnectionClosed(clientId: String) {
-        TODO("Not yet implemented")
+        println("Client $clientId disconnected")
     }
 }

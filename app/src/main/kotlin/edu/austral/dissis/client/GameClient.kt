@@ -13,8 +13,12 @@ import java.net.InetSocketAddress
 class GameClient{
     private lateinit var client: Client
 
-    fun start(root: GameView) {
-        client = buildClient(root)
+    fun start(
+        root: GameView,
+        host: String = "localhost",
+        port: Int = 8080
+    ) {
+        client = buildClient(root, host, port)
 
         client.connect()
 
@@ -29,10 +33,10 @@ class GameClient{
         client.send(Message("move", MovePayload(from, to)))
     }
 
-    private fun buildClient(root: GameView): Client{
+    private fun buildClient(root: GameView, host: String, port: Int): Client{
         return NettyClientBuilder
             .createDefault()
-            .withAddress(InetSocketAddress(8080))
+            .withAddress(InetSocketAddress(host, port))
             .addMessageListener(
                 "init",
                 object : TypeReference<Message<InitPayload>>() {},
