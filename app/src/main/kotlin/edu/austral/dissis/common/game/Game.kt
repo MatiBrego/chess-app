@@ -1,31 +1,33 @@
 package edu.austral.dissis.common.game
 
+import edu.austral.dissis.chess.wincondition.NormalCheckMateValidator
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.Coordinate
 import edu.austral.dissis.common.executor.MoveExecutor
 import edu.austral.dissis.common.executor.NormalExecutor
-import edu.austral.dissis.common.wincondition.WinningConditionValidator
-import edu.austral.dissis.chess.wincondition.NormalCheckMateValidator
 import edu.austral.dissis.common.piece.Team
-import edu.austral.dissis.common.result.rule.InvalidResult
-import edu.austral.dissis.common.result.rule.ValidResult
 import edu.austral.dissis.common.result.action.Action
 import edu.austral.dissis.common.result.move.EndOfGameResult
 import edu.austral.dissis.common.result.move.MoveResult
 import edu.austral.dissis.common.result.move.SuccessfulResult
 import edu.austral.dissis.common.result.move.UnsuccessfulResult
+import edu.austral.dissis.common.result.rule.InvalidResult
+import edu.austral.dissis.common.result.rule.ValidResult
 import edu.austral.dissis.common.rule.Rule
+import edu.austral.dissis.common.turn.OneEach
+import edu.austral.dissis.common.turn.Turn
+import edu.austral.dissis.common.wincondition.WinningConditionValidator
 
 class Game(
     private var board: Board,
-    private val turn: Team = Team.WHITE,
+    private val turnManager: Turn = OneEach(Team.WHITE),
     private val rules: List<Rule>,
     private val winningConditionValidator: WinningConditionValidator = NormalCheckMateValidator(),
     private val moveExecutor: MoveExecutor = NormalExecutor()
 ) {
 
     fun move(from: Coordinate, to: Coordinate): MoveResult {
-        val move = Move(from, to, turn)
+        val move = Move(from, to, turnManager.getCurrentTeam())
 
         val gameValidationResult = validateGameRules(move)
         if (gameValidationResult !is SuccessfulResult) return gameValidationResult
@@ -33,7 +35,11 @@ class Game(
         val pieceValidationResult = validatePieceRules(move)
         if (pieceValidationResult !is SuccessfulResult) return pieceValidationResult
 
-        if (isCheckMate(pieceValidationResult.game.getBoard())) return EndOfGameResult(turn)
+        val turnValidationResult = validateTurnRules(move)
+        if (turnValidationResult !is SuccessfulResult) return turnValidationResult
+
+        if (isCheckMate(pieceValidationResult.game.getBoard()))
+            return EndOfGameResult(turnManager.getCurrentTeam())
 
         return pieceValidationResult
     }
@@ -43,7 +49,7 @@ class Game(
     }
 
     fun getTurn(): Team {
-        return this.turn
+        return this.turnManager.getCurrentTeam()
     }
 
     private fun validateGameRules(move: Move): MoveResult {
@@ -71,7 +77,7 @@ class Game(
         return SuccessfulResult(
             Game(
                 modifiedBoard,
-                getEnemyTeam(),
+                turnManager.getNextTurn(move, this.board),
                 rules,
                 winningConditionValidator,
                 moveExecutor
@@ -80,7 +86,7 @@ class Game(
     }
 
     private fun getEnemyTeam(): Team {
-        return when(turn){
+        return when(turnManager.getCurrentTeam()){
             Team.WHITE -> Team.BLACK
             Team.BLACK -> Team.WHITE
         }
@@ -88,5 +94,12 @@ class Game(
 
     private fun isCheckMate(board: Board): Boolean{
         return winningConditionValidator.isWin(board, getEnemyTeam(), rules)
+    }
+
+    private fun validateTurnRules(move: Move): MoveResult {
+        return when (val ruleResult = turnManager.validateTurnRules(move, this.board)){
+            is ValidResult -> SuccessfulResult(this)
+            is InvalidResult -> UnsuccessfulResult(ruleResult.getMessage())
+        }
     }
 }

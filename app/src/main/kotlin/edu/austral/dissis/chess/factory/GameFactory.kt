@@ -9,13 +9,14 @@ import edu.austral.dissis.common.rule.Rule
 import edu.austral.dissis.common.rule.game.IsOccupiedByTeamValidator
 import edu.austral.dissis.common.rule.game.IsYourTurnValidator
 import edu.austral.dissis.common.rule.game.PieceIsPresentValidator
+import edu.austral.dissis.common.turn.OneEach
 import edu.austral.dissis.common.wincondition.EatAllEnemyPiecesValidator
 
 object NormalChessGame {
     operator fun invoke(): Game {
         return Game(
             board = createNormalStartingBoard(),
-            turn = Team.WHITE,
+            turnManager = OneEach(Team.WHITE),
             rules = createNormalRules(),
             winningConditionValidator = NormalCheckMateValidator(),
             moveExecutor = NormalExecutor()
@@ -26,7 +27,7 @@ object NormalChessGame {
 fun createNormalChessGame(): Game {
     return Game(
         board = createNormalStartingBoard(),
-        turn = Team.WHITE,
+        turnManager = OneEach(Team.WHITE),
         rules = createNormalRules(),
         winningConditionValidator = NormalCheckMateValidator(),
         moveExecutor = NormalExecutor()
@@ -36,7 +37,7 @@ fun createNormalChessGame(): Game {
 fun createAlternativeGame(): Game {
     return Game(
         board = createBoardWithSpecialPieces(),
-        turn = Team.WHITE,
+        turnManager = OneEach(Team.WHITE),
         rules = createAlternativeRules(),
         winningConditionValidator = EatAllEnemyPiecesValidator(),
         moveExecutor = NormalExecutor()
@@ -46,7 +47,7 @@ fun createAlternativeGame(): Game {
 fun createGameWithSpecialSizedBoard(): Game{
     return Game(
         board = createAlternativeDimensionsBoard(),
-        turn = Team.WHITE,
+        turnManager = OneEach(Team.WHITE),
         rules = createAlternativeRules(),
         winningConditionValidator = EatAllEnemyPiecesValidator(),
         moveExecutor = NormalExecutor()

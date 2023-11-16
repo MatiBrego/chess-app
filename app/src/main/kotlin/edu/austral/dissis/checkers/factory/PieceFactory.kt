@@ -10,8 +10,22 @@ fun createMan(team: Team): Piece {
         pieceType = CheckersPieceType.Man,
         Or(
             listOf(
+                crown(team),
                 singleDiagonalForward(),
                 captureForward()
+            )
+        ),team
+    )
+}
+
+fun createKing(team: Team): Piece {
+    return Piece(
+        pieceType = CheckersPieceType.King,
+        Or(
+            listOf(
+                singleDiagonal(),
+                captureForward(),
+                captureBackward()
             )
         ),team
     )
