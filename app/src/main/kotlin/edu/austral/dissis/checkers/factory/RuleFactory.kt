@@ -142,7 +142,7 @@ fun captureCrownLeft(team: Team): Rule {
         listOf(
             captureForward(),
             IsOpposingRowValidator(),
-            RightValidator()
+            LeftValidator()
         )
     ).withActions(
         listOf(
