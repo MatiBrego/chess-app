@@ -6,3 +6,5 @@ build
 
 # Ignore .env file
 .env
+
+.idea
