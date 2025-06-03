@@ -1,7 +1,7 @@
 plugins {
     java
     application
-    kotlin("jvm") version "1.9.10"
+    kotlin("jvm") version "2.1.20"
     id("org.openjfx.javafxplugin").version("0.0.13")
 
 }
@@ -26,6 +26,13 @@ repositories {
             password = System.getenv("GITHUB_TOKEN")
         }
     }
+    maven {
+        url = uri("https://maven.pkg.github.com/austral-ingsis/test-framework")
+        credentials {
+            username = System.getenv("GITHUB_USER")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 dependencies {
@@ -33,6 +40,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("edu.austral.dissis.chess:chess-ui:2.0.1")
     implementation("edu.austral.dissis.chess:simple-client-server:1.2.0")
+    testImplementation("edu.austral.dissis.chess:test-framework:1.4.0")
     testImplementation(kotlin("test"))
 }
 

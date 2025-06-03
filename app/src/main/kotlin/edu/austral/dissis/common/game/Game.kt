@@ -39,7 +39,7 @@ class Game(
         if (turnValidationResult !is SuccessfulResult) return turnValidationResult
 
         if (isCheckMate(pieceValidationResult.game.getBoard()))
-            return EndOfGameResult(turnManager.getCurrentTeam())
+            return EndOfGameResult(turnManager.getCurrentTeam(), pieceValidationResult.game.getBoard())
 
         return pieceValidationResult
     }

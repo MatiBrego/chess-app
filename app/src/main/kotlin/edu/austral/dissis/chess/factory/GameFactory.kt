@@ -2,6 +2,7 @@ package edu.austral.dissis.chess.factory
 
 import edu.austral.dissis.chess.rule.game.IsNotCheckValidator
 import edu.austral.dissis.chess.wincondition.NormalCheckMateValidator
+import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.executor.NormalExecutor
 import edu.austral.dissis.common.game.Game
 import edu.austral.dissis.common.piece.Team
@@ -24,9 +25,9 @@ object NormalChessGame {
     }
 }
 
-fun createNormalChessGame(): Game {
+fun createNormalChessGame(board: Board?): Game {
     return Game(
-        board = createNormalStartingBoard(),
+        board = board ?: createNormalStartingBoard(),
         turnManager = OneEach(Team.WHITE),
         rules = createNormalRules(),
         winningConditionValidator = NormalCheckMateValidator(),

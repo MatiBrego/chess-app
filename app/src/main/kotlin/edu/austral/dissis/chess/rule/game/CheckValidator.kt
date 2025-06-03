@@ -31,7 +31,7 @@ class CheckValidator {
             val piece = board.getPiece(coordinate) ?: throw NoSuchElementException("No piece found")
             when (
                 piece.validateMove(
-                    Move(coordinate, kingPosition, kingsTeam), board
+                    Move(coordinate, kingPosition, getOppositeTeam(kingsTeam)), board
                 )
             ) {
                 is ValidResult -> return true
@@ -48,5 +48,12 @@ class CheckValidator {
             }
         }
         return null
+    }
+
+    private fun getOppositeTeam(team: Team): Team {
+        return when (team) {
+            Team.WHITE -> Team.BLACK
+            Team.BLACK -> Team.WHITE
+        }
     }
 }
